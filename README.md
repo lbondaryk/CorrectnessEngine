@@ -10,9 +10,10 @@ The project uses make tool. If you are using Mac, you must install Xcode first.
 Directory Structure
 -------------------
 - lib    - Contains the application source code
+  - ce.js          - The CE component
   - controller.js  - The controller that includes the routes
-  - cd.js          - The CE component
   - utils.js       - File that contains utility functions
+  - webservice.js  - Called by the main application file to start or stop the app
 - schema - Message validation schema
 - test
   - integration   - Integration testing
