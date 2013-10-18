@@ -6,5 +6,5 @@
     "maxSockets": 100,
 
     "logLevel": "info",
-    "logToScreen": true
+    "logToScreen": false
 }

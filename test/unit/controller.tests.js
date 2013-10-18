@@ -132,7 +132,6 @@ describe ('CE Controller', function(){
 
     describe ('/assessments handler', function() {
         var controller = null;
-        var ce = null;
         var handler = null;
 
         before(function () {
