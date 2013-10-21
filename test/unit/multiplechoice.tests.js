@@ -24,7 +24,7 @@ var MultipleChoice = require('../../lib/types/multiplechoice');
 
 var mockdata = require('../test_messages/multiplechoice_incorrect_last.json');
 
-describe('CE handles assessments', function() {
+describe('MultipleChoice assessments', function() {
     var mc = null;
 
     before(function () {

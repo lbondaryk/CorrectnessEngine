@@ -130,7 +130,7 @@ describe('IPC -> CE Multiple Choice', function()
             {
 				if (err) return done(err);
                 try {
-                    console.log("@@@:"+JSON.stringify(result.body));
+                    //console.log("@@@:"+JSON.stringify(result.body));
                     expect(result.body.code).to.equal(400);
                     // @todo - for whatever reason we aren't getting 'status' back in the return body.  we should look into this.
                     //expect(result.body.status).to.equal('success');
