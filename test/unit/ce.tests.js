@@ -22,32 +22,7 @@ var config = require('config');
 var utils = require('../../lib/utils');
 var CE = require('../../lib/ce');
 
-var mockdata = {
-    "sequenceNodeKey": "8238fsdfhe9h9shdds",
-    "answerKey": {
-        "assessmentType": "multiplechoice",
-        "answers": {
-            "option000": {
-              "response": "Your answer <%= studAnsValue %> is correct. Growth rate stays constant.",
-              "score": 1
-            },
-            "option001": {
-              "response": "Does the growth rate change with population size?",
-              "score": 0
-            },
-            "option002": {
-              "response": "Does the fertility rate change with population size?",
-              "score": 0
-            },
-            "option003": {
-            "response": "This might happen but is it something is necessarily occurs?",
-            "score": 0
-            }
-        }
-    },
-    "studentSubmission": { "submission": "option003"},
-    "isLastAttempt": true
-};
+var mockdata = require('../test_messages/multiplechoice_incorrect_last.json');
 
 describe('CE handles assessments', function() {
     var ce = null;

@@ -5,6 +5,6 @@
     "port": 8088,
     "maxSockets": 100,
 
-    "logLevel": "info",
+    "logLevel": "debug",
     "logToScreen": false
 }

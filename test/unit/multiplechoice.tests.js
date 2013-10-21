@@ -22,39 +22,13 @@ var config = require('config');
 var utils = require('../../lib/utils');
 var MultipleChoice = require('../../lib/types/multiplechoice');
 
-var mockdata = {
-    "sequenceNodeKey": "8238fsdfhe9h9shdds",
-    "answerKey": {
-        "assessmentType": "multiplechoice",
-        "answers": {
-            "option000": {
-              "response": "Your answer <%= studAnsValue %> is correct. Growth rate stays constant.",
-              "score": 1
-            },
-            "option001": {
-              "response": "Does the growth rate change with population size?",
-              "score": 0
-            },
-            "option002": {
-              "response": "Does the fertility rate change with population size?",
-              "score": 0
-            },
-            "option003": {
-            "response": "This might happen but is it something is necessarily occurs?",
-            "score": 0
-            }
-        }
-    },
-    "studentSubmission": { "submission": "option000"},
-    "isLastAttempt": true
-};
+var mockdata = require('../test_messages/multiplechoice_incorrect_last.json');
 
 describe('CE handles assessments', function() {
     var mc = null;
 
     before(function () {
-        //mc = new MultipleChoice.AssessmentHandler();
-        mc = MultipleChoice.createAssessmentHander();
+        mc = MultipleChoice.createAssessmentHandler();
     });
 
     // @todo - unskip this when we implement a schema
@@ -110,12 +84,12 @@ describe('CE handles assessments', function() {
         });
     });
 
-    it('should handle correct submission', function (done) {
+    it('should handle incorrect submission', function (done) {
         var data = utils.cloneObject(mockdata);
         mc.assess(data, function(err, result)  {
             try {
-                expect(result.correctness).to.equal(1);
-                expect(result.feedback).to.equal('Your answer <%= studAnsValue %> is correct. Growth rate stays constant.');
+                expect(result.correctness).to.equal(0);
+                expect(result.feedback).to.equal('This might happen but is it something is necessarily occurs?');
                 done();
             }
             catch (e)
@@ -125,13 +99,13 @@ describe('CE handles assessments', function() {
         });
     });
 
-    it('should handle incorrect submission', function (done) {
+    it('should handle correct submission', function (done) {
         var data = utils.cloneObject(mockdata);
-        data.studentSubmission.submission = "option003";
+        data.studentSubmission.submission = "option000";
         mc.assess(data, function(err, result)  {
             try {
-                expect(result.correctness).to.equal(0);
-                expect(result.feedback).to.equal('This might happen but is it something is necessarily occurs?');
+                expect(result.correctness).to.equal(1);
+                expect(result.feedback).to.equal('Your answer <%= studAnsValue %> is correct. Growth rate stays constant.');
                 done();
             }
             catch (e)
