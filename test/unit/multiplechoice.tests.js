@@ -53,7 +53,8 @@ describe('CE handles assessments', function() {
     var mc = null;
 
     before(function () {
-        mc = new MultipleChoice.AssessmentHandler();
+        //mc = new MultipleChoice.AssessmentHandler();
+        mc = MultipleChoice.createAssessmentHander();
     });
 
     // @todo - unskip this when we implement a schema
