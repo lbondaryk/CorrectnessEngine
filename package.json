@@ -19,7 +19,8 @@
     "underscore": "~1.5.2",
     "q": "~0.9.7",
     "bunyan": "~0.21.4",
-    "config": "~0.4.30"
+    "config": "~0.4.30",
+    "z-schema": "~2.0.0"
   },
   "devDependencies": {
     "mocha": "~1.12.0",

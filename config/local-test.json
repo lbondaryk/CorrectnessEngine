@@ -6,5 +6,8 @@
     "maxSockets": 100,
 
     "logLevel": "info",
-    "logToScreen": true
+    "logToScreen": false,
+    "logToFile": false,
+    // run validation against answerKey and studentSubmission schema
+    "validateSchema": true
 }

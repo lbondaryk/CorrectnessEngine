@@ -20,12 +20,15 @@ process.env.NODE_ENV = 'test';
 
 var assert = require('assert');
 var nock = require('nock');
+var sinon = require('sinon');
 var _ = require('underscore');
 var Joi = require('joi');
 var expect = require('chai').expect;
 var config = require('config');
 var utils = require('../../lib/utils');
 var Controller = require('../../lib/controller');
+
+// @todo - go through and remove all the 'assert's and change them to 'expects'.
 
 describe ('CE Controller', function(){
 
@@ -39,8 +42,8 @@ describe ('CE Controller', function(){
             var controller = new Controller();
 
             //Arrange
-            assert(controller);
-            assert(controller instanceof Controller);
+            expect(controller).to.exist;
+            expect(controller).to.be.an.instanceof(Controller);
             done();
         });
 
@@ -103,6 +106,9 @@ describe ('CE Controller', function(){
     describe ('joi schema validation', function () {
         //Arrange
         var controller = null;
+        var ce = null;
+
+
         before(function () {
             controller = new Controller();
         });
@@ -121,6 +127,67 @@ describe ('CE Controller', function(){
             var err = Joi.validate(payload,controller.joiSchema());
             expect(err).to.be.null;
             done();
+        });
+    });
+
+    describe ('/assessments handler', function() {
+        var controller = null;
+        var handler = null;
+
+        before(function () {
+            controller = new Controller();
+            handler = controller.routes[1].handler;
+        });
+
+        // We sandbox our sinon stubs within each 'it'.  Otherwise the method wrapper we write in on lasts indefinitely.
+        var sandbox;
+        beforeEach(function () {
+            sandbox = sinon.sandbox.create();
+        });
+        afterEach(function () {
+            sandbox.restore();
+        });
+
+
+
+        it ('should return a success result under normal conditions', function(done) {
+            var stub = sandbox.stub(controller.ce, "processSubmission", function (data, callback) {
+                var result = {"correctness": 1};
+                callback(null, result);
+            });
+
+            var request = new RequestMock(onReplyCallback);
+            
+            //Act
+            handler(request);
+            
+            //Assert
+            function onReplyCallback(replyValue) {
+                expect(replyValue).to.exist;
+                expect(stub.called).to.be.true;
+                expect(replyValue.status).to.equal('success');
+                done();
+            }
+
+        });
+        it ('should return an error', function(done) {
+            var stub = sandbox.stub(controller.ce, "processSubmission", function (data, callback) {
+                var error = {"message": "Whack, bro."};
+                callback(error, null);
+            });
+
+            var request = new RequestMock(onReplyCallback);
+            
+            //Act
+            handler(request);
+
+            //Assert
+            function onReplyCallback(replyValue) {
+                expect(replyValue).to.exist;
+                expect(stub.called).to.be.true;
+                expect(replyValue.status).to.equal('error');
+                done();
+            }
         });
     });
 });
@@ -150,5 +217,6 @@ function RequestMock(onReplyCallback) {
     this.reply = function(value) {
         onReplyCallback(value);
     };
+    this.payload = {"test": 1};
 }
 

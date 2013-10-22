@@ -20,18 +20,49 @@ var expect = require('chai').expect;
 var config = require('config');
 
 var utils = require('../../lib/utils');
-var CE = require('../../lib/ce').CE;
+var CE = require('../../lib/ce');
+
+var mockdata = require('../test_messages/multiplechoice_incorrect_last.json');
 
 describe('CE handles assessments', function() {
     var ce = null;
 
     before(function () {
-        ce = new CE();
+        ce = new CE.EngineHandler();
     });
 
-    it('should...', function (done) {
-        expect(true).to.be.ok;
-        done();
+    it('should throw an error with unknown type submissions', function (done) {
+        var data = utils.cloneObject(mockdata);
+        // update the assessmentType to some bad data
+        data.answerKey.assessmentType = "monkey";
+        ce.processSubmission(data, function(err, result)  {
+            try {
+                expect(err).to.equal('The assessmentType \'monkey\' can not be processed by this Correctness Engine');
+                done();
+            }
+            catch (e)
+            {
+                done(e);
+            }
+        });
     });
+
+    it('should handle correct alwayscorrect submission', function (done) {
+        var data = utils.cloneObject(mockdata);
+        data.answerKey.assessmentType = "alwayscorrect";
+        ce.processSubmission(data, function(err, result)  {
+            try {
+                expect(result.correctness).to.equal(1);
+                done();
+            }
+            catch (e)
+            {
+                done(e);
+            }
+        });
+    });
+
+
+
 
 });
