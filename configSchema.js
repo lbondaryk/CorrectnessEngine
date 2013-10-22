@@ -8,5 +8,7 @@ module.exports = {
     "maxSockets":           Joi.Types.Number().min(1).required(),
     "logLevel":             Joi.Types.String(),
     "logToScreen":          Joi.Types.Boolean(),
-    "logToFile":            Joi.Types.Boolean()
+    "logToFile":            Joi.Types.Boolean(),
+    "logDir":               Joi.types.String(),
+    "validateSchema":       Joi.types.Boolean()
 };

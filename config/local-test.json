@@ -5,6 +5,9 @@
     "port": 8088,
     "maxSockets": 100,
 
-    "logLevel": "debug",
-    "logToScreen": false
+    "logLevel": "info",
+    "logToScreen": false,
+    "logToFile": false,
+    // run validation against answerKey and studentSubmission schema
+    "validateSchema": true
 }
