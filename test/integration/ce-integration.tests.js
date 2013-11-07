@@ -41,7 +41,14 @@ describe('IPC -> CE Multiple Choice', function()
     });
 
     it('should return a valid Result given a valid but incorrect submission message', function (done) {
-		var properReturnVal = {"correctness":0,"feedback":"This might happen but is it something is necessarily occurs?","correctAnswer":"option000"};
+		var properReturnVal = {
+            "correctness": 0,
+            "feedback": "This might happen but is it something is necessarily occurs?",
+            "correctAnswer": {
+                "key": "option000",
+                "feedback": "Your answer <%= studAnsValue %> is correct. Growth rate stays constant."
+            }
+        };
 		var message = utils.cloneObject(multiplechoice_incorrect_last);
 		request(server.listener)
             .post('/assessments')
@@ -92,7 +99,14 @@ describe('IPC -> CE Multiple Choice', function()
     });
 
     it('should return a valid Result given a valid correct submission message', function (done) {
-		var properReturnVal = {"correctness":1,"feedback":"Your answer <%= studAnsValue %> is correct. Growth rate stays constant.","correctAnswer":"option000"};
+		var properReturnVal = {
+            "correctness": 1,
+            "feedback": "Your answer <%= studAnsValue %> is correct. Growth rate stays constant.",
+            "correctAnswer": {
+                "key": "option000",
+                "feedback": "Your answer <%= studAnsValue %> is correct. Growth rate stays constant."
+            }
+        };
 		var message = utils.cloneObject(multiplechoice_incorrect_last);
 		message.studentSubmission.submission = "option000";
 		request(server.listener)

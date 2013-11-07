@@ -135,7 +135,8 @@ describe('MultipleChoice assessments', function() {
             try {
                 expect(result.correctness).to.equal(0);
                 expect(result.feedback).to.equal('This might happen but is it something is necessarily occurs?');
-                expect(result.correctAnswer).to.equal('option000');
+                expect(result.correctAnswer.key).to.equal('option000');
+                expect(result.correctAnswer.feedback).to.equal('Your answer <%= studAnsValue %> is correct. Growth rate stays constant.');
                 done();
             }
             catch (e)
