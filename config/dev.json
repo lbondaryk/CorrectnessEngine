@@ -1,13 +1,13 @@
 {
-	"numWorkers": 2,
-	"maxDeadWorkerSize": 10,
-	"host": "10.11.20.91",
-	"port": 8090,
-	"maxSockets": 100,
+    "numWorkers": 2,
+    "maxDeadWorkerSize": 10,
+    "host": "10.11.16.30",
+    "port": 8090,
+    "maxSockets": 100,
 
-	"logLevel": "info",
+    "logLevel": "info",
     "logToScreen": false,
     "logToFile": true,
-    "logDir": "/home/bitnami/log/",
+    "logDir": "/home/ubuntu/applications/log/",
     "validateSchema": false
 }
