@@ -1,0 +1,13 @@
+{
+	"numWorkers": 2,
+	"maxDeadWorkerSize": 10,
+	"host": "localhost",
+	"port": 8090,
+	"maxSockets": 100,
+
+	"logLevel": "debug",
+    "logToScreen": true,
+    "logToFile": true,
+    "logDir": "log/",
+    "validateSchema": false
+}
