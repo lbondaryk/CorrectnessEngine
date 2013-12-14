@@ -1,13 +1,13 @@
 {
     "numWorkers": 2,
     "maxDeadWorkerSize": 10,
-    "host": "10.11.16.30",
+    "host": "0.0.0.0",
     "port": 8090,
     "maxSockets": 100,
 
-    "logLevel": "info",
+    "logLevel": "trace",
     "logToScreen": false,
     "logToFile": true,
     "logDir": "/home/ubuntu/applications/log/",
-    "validateSchema": false
+    "validateSchema": true
 }

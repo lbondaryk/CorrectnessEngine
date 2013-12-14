@@ -8,6 +8,8 @@
 	"logLevel": "debug",
     "logToScreen": true,
     "logToFile": true,
-    "logDir": "log/",
-    "validateSchema": false
+    "logDir": "../log/",
+    "logAllowWebAccess": true,
+    
+    "validateSchema": true
 }
