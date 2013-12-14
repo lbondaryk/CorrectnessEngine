@@ -10,5 +10,6 @@ module.exports = {
     "logToScreen":          Joi.Types.Boolean(),
     "logToFile":            Joi.Types.Boolean(),
     "logDir":               Joi.types.String(),
+    "logAllowWebAccess":    Joi.types.Boolean().optional(),
     "validateSchema":       Joi.types.Boolean()
 };
