@@ -5,11 +5,11 @@
     "port": 8080,
     "maxSockets": 100,
 
-    "logLevel": "debug",
+    "logLevel": "info",
     "logToScreen": false,
     "logToFile": true,
     "logDir": "/home/ubuntu/applications/log/",
     "logAllowWebAccess": true,
-
+    
     "validateSchema": false
 }
