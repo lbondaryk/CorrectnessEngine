@@ -81,11 +81,11 @@ describe('MultipleChoice assessments', function() {
 
     it('should complain if submission is not in answer key', function (done) {
         var data = utils.cloneObject(mockdata);
-        data.studentSubmission = {"submission": "pants"};
+        data.studentSubmission = {"key": "pants"};
         ce.processSubmission(data, function(err, result)  {
             try {
                 expect(err).to.not.be.null;
-                expect(err.message).to.equal('Submission not in answer key');
+                expect(err.message).to.equal('Submission Key not in answer key');
                 expect(result).to.be.null;
                 done();
             }
@@ -113,7 +113,7 @@ describe('MultipleChoice assessments', function() {
 
     it('should handle correct submission', function (done) {
         var data = utils.cloneObject(mockdata);
-        data.studentSubmission.submission = "option000";
+        data.studentSubmission.key = "option000";
         ce.processSubmission(data, function(err, result)  {
             try {
                 expect(result.correctness).to.equal(1);
@@ -130,7 +130,7 @@ describe('MultipleChoice assessments', function() {
     it('should report back the correct answer if isLastAttempt is true', function (done) {
         var data = utils.cloneObject(mockdata);
         // set an incorrect answer, just for fun.
-        data.studentSubmission.submission = "option003";
+        data.studentSubmission.key = "option003";
         ce.processSubmission(data, function(err, result)  {
             try {
                 expect(result.correctness).to.equal(0);
@@ -149,7 +149,7 @@ describe('MultipleChoice assessments', function() {
     it('should not report back the correct answer if isLastAttempt is false', function (done) {
         var data = utils.cloneObject(mockdata);
 
-        data.studentSubmission.submission = "option003";
+        data.studentSubmission.key = "option003";
         data.isLastAttempt = false;
         ce.processSubmission(data, function(err, result)  {
             try {
