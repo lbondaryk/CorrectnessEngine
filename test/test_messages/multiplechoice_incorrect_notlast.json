@@ -21,6 +21,6 @@
             }
         }
     },
-    "studentSubmission": { "submission": "option002"},
+    "studentSubmission": { "key": "option002"},
     "isLastAttempt": false
 }

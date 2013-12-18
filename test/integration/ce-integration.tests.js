@@ -135,7 +135,7 @@ describe('IPC -> CE Multiple Choice', function()
             "correctAnswer": null
         };
 		var message = utils.cloneObject(multiplechoice_incorrect_last);
-		message.studentSubmission.submission = "option000";
+		message.studentSubmission.key = "option000";
 		request(server.listener)
             .post('/assessments')
             .send(message)
