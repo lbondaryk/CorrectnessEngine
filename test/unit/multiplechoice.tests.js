@@ -146,6 +146,29 @@ describe('MultipleChoice assessments', function() {
         });
     });
 
+    it('should report back the correct answer with empty feedback string if isLastAttempt is true', function (done) {
+        var data = utils.cloneObject(mockdata);
+        // set an incorrect answer, just for fun.
+        data.studentSubmission.key = "option003";
+        // remove the feedback value from the correct answer
+        data.answerKey.answers.option000.response = "";
+
+        ce.processSubmission(data, function(err, result)  {
+            try {
+                console.log(JSON.stringify(result));
+                expect(result.correctness).to.equal(0);
+                expect(result.feedback).to.equal('This might happen but is it something is necessarily occurs?');
+                expect(result.correctAnswer.key).to.equal('option000');
+                expect(result.correctAnswer.feedback).to.equal('');
+                done();
+            }
+            catch (e)
+            {
+                done(e);
+            }
+        });
+    });
+
     it('should not report back the correct answer if isLastAttempt is false', function (done) {
         var data = utils.cloneObject(mockdata);
 
