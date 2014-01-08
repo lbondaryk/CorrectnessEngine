@@ -155,7 +155,7 @@ describe('MultipleChoice assessments', function() {
 
         ce.processSubmission(data, function(err, result)  {
             try {
-                console.log(JSON.stringify(result));
+                //console.log(JSON.stringify(result));
                 expect(result.correctness).to.equal(0);
                 expect(result.feedback).to.equal('This might happen but is it something is necessarily occurs?');
                 expect(result.correctAnswer.key).to.equal('option000');
