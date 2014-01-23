@@ -53,7 +53,7 @@ script
     export NODE_ENV=$NODE_ENV
     chdir $HOME
     exec /usr/local/bin/node $APP >> $SERVERLOG 2>&1&
-    #exec /usr/localh/bin/node $APP > $SERVERLOG &
+    #exec /usr/local/bin/node $APP > $SERVERLOG &
 end script
 
 #post-start script
