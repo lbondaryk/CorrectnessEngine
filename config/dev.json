@@ -2,7 +2,7 @@
     "numWorkers": 2,
     "maxDeadWorkerSize": 10,
     "host": "0.0.0.0",
-    "port": 8090,
+    "port": 8080,
     "maxSockets": 100,
 
     "logLevel": "trace",
