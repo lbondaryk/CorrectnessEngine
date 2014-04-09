@@ -1,8 +1,8 @@
 /* **************************************************************************
- * $Workfile:: ce.tests.js                                             $
+ * $Workfile:: multiplechoice.tests.js                                      $
  * *********************************************************************/ /**
  *
- * @fileoverview Contains unit tests for ce.js
+ * @fileoverview Contains unit tests for multiplechioce.js
  *
  *
  * Created on       Oct 11, 2013
