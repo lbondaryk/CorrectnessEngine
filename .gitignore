@@ -43,6 +43,7 @@ config/local.json
 *.log.xml
 *.sql
 *.sqlite
+log
 
 # OS generated files #
 ######################

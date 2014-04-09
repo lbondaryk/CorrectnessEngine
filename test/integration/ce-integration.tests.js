@@ -45,7 +45,8 @@ describe('IPC -> CE Multiple Choice', function()
         var properReturnVal = {
             "correctness": 0,
             "feedback": "Does the fertility rate change with population size?",
-            "correctAnswer": null
+            "correctAnswer": null,
+            "stats": {"answerId":"option002", "response":null}
         };
         var message = utils.cloneObject(multiplechoice_incorrect_notlast);
         request(server.listener)
@@ -77,7 +78,8 @@ describe('IPC -> CE Multiple Choice', function()
             "correctAnswer": {
                 "key": "option000",
                 "feedback": "Your answer <%= studAnsValue %> is correct. Growth rate stays constant."
-            }
+            },
+            "stats": {"answerId":"option003", "response":null}
         };
 		var message = utils.cloneObject(multiplechoice_incorrect_last);
 		request(server.listener)
@@ -90,7 +92,7 @@ describe('IPC -> CE Multiple Choice', function()
             {
 				if (err) return done(err);
                 try {
-                    //console.log("@@@:"+JSON.stringify(result.body));
+                    console.log("@@@:"+JSON.stringify(result.body));
                     expect(result.body.code).to.equal(200);
                     expect(result.body.status).to.equal('success');
                     expect(result.body.data).to.deep.equal(properReturnVal);
@@ -103,7 +105,12 @@ describe('IPC -> CE Multiple Choice', function()
     });
 
     it('should return a valid Result given a valid but incorrect submission message without correct answer', function (done) {
-		var properReturnVal = {"correctness":0,"feedback":"This might happen but is it something is necessarily occurs?","correctAnswer":null};
+		var properReturnVal = {
+            "correctness": 0,
+            "feedback": "This might happen but is it something is necessarily occurs?",
+            "correctAnswer": null,
+            "stats": {"answerId":"option003", "response":null}
+        };
 		var message = utils.cloneObject(multiplechoice_incorrect_last);
 		message.isLastAttempt = false;
 		request(server.listener)
@@ -132,7 +139,8 @@ describe('IPC -> CE Multiple Choice', function()
 		var properReturnVal = {
             "correctness": 1,
             "feedback": "Your answer <%= studAnsValue %> is correct. Growth rate stays constant.",
-            "correctAnswer": null
+            "correctAnswer": null,
+            "stats": {"answerId":"option000", "response":null}
         };
 		var message = utils.cloneObject(multiplechoice_incorrect_last);
 		message.studentSubmission.key = "option000";

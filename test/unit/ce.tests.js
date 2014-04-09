@@ -22,7 +22,8 @@ var config = require('config');
 var utils = require('../../lib/utils');
 var CE = require('../../lib/ce');
 
-var mockdata = require('../test_messages/multiplechoice_incorrect_last.json');
+var mcqmockdata = require('../test_messages/multiplechoice_incorrect_last.json');
+var journalmockdata = require('../test_messages/journal.json');
 
 describe('CE handles assessments', function() {
     var ce = null;
@@ -32,7 +33,7 @@ describe('CE handles assessments', function() {
     });
 
     it('should throw an error with unknown type submissions', function (done) {
-        var data = utils.cloneObject(mockdata);
+        var data = utils.cloneObject(mcqmockdata);
         // update the assessmentType to some bad data
         data.answerKey.assessmentType = "monkey";
         ce.processSubmission(data, function(err, result)  {
@@ -48,11 +49,12 @@ describe('CE handles assessments', function() {
     });
 
     it('should handle correct alwayscorrect submission', function (done) {
-        var data = utils.cloneObject(mockdata);
-        data.answerKey.assessmentType = "alwayscorrect";
+        var data = utils.cloneObject(journalmockdata);
         ce.processSubmission(data, function(err, result)  {
             try {
                 expect(result.correctness).to.equal(1);
+                expect(result.stats.response).to.equal('I love journals.');
+                expect(result.stats.answerId).to.be.null;
                 done();
             }
             catch (e)

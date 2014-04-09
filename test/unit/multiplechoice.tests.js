@@ -42,7 +42,6 @@ describe('MultipleChoice assessments', function() {
         ce = new CE.EngineHandler();
     });
 
-    // @todo - unskip this when we implement a schema
     it('should complain if answer is badly formatted', function (done) {
         var data = utils.cloneObject(mockdata);
         data.answerKey = {assessmentWrong: "thingy", answers: "string"};
@@ -60,7 +59,6 @@ describe('MultipleChoice assessments', function() {
         });
     });
 
-    // @todo - unskip this when we implement a schema
     it('should complain if submission is badly formatted', function (done) {
         var data = utils.cloneObject(mockdata);
         data.studentSubmission = {"submissiony": {"thing": "so wrong"}};
@@ -102,6 +100,8 @@ describe('MultipleChoice assessments', function() {
             try {
                 expect(result.correctness).to.equal(0);
                 expect(result.feedback).to.equal('This might happen but is it something is necessarily occurs?');
+                expect(result.stats.response).to.be.null;
+                expect(result.stats.answerId).to.equal('option003');
                 done();
             }
             catch (e)
@@ -118,6 +118,8 @@ describe('MultipleChoice assessments', function() {
             try {
                 expect(result.correctness).to.equal(1);
                 expect(result.feedback).to.equal('Your answer <%= studAnsValue %> is correct. Growth rate stays constant.');
+                expect(result.stats.response).to.be.null;
+                expect(result.stats.answerId).to.equal('option000');
                 done();
             }
             catch (e)
@@ -137,6 +139,8 @@ describe('MultipleChoice assessments', function() {
                 expect(result.feedback).to.equal('This might happen but is it something is necessarily occurs?');
                 expect(result.correctAnswer.key).to.equal('option000');
                 expect(result.correctAnswer.feedback).to.equal('Your answer <%= studAnsValue %> is correct. Growth rate stays constant.');
+                expect(result.stats.response).to.be.null;
+                expect(result.stats.answerId).to.equal('option003');
                 done();
             }
             catch (e)
@@ -160,6 +164,8 @@ describe('MultipleChoice assessments', function() {
                 expect(result.feedback).to.equal('This might happen but is it something is necessarily occurs?');
                 expect(result.correctAnswer.key).to.equal('option000');
                 expect(result.correctAnswer.feedback).to.equal('');
+                expect(result.stats.response).to.be.null;
+                expect(result.stats.answerId).to.equal('option003');
                 done();
             }
             catch (e)
@@ -179,6 +185,8 @@ describe('MultipleChoice assessments', function() {
                 expect(result.correctness).to.equal(0);
                 expect(result.feedback).to.equal('This might happen but is it something is necessarily occurs?');
                 expect(result.correctAnswer).to.be.null;
+                expect(result.stats.response).to.be.null;
+                expect(result.stats.answerId).to.equal('option003');
                 done();
             }
             catch (e)
