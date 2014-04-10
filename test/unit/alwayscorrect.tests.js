@@ -62,7 +62,6 @@ var journalmockdata = require('../test_messages/journal.json');
         var data = utils.cloneObject(journalmockdata);
         delete data.studentSubmission.entry;
         data.studentSubmission.pants = "Oh, yeah!";
-        console.log(data);
         ce.processSubmission(data, function(err, result)  {
             try {
                 expect(result.correctness).to.equal(1);
@@ -81,11 +80,57 @@ var journalmockdata = require('../test_messages/journal.json');
         var data = utils.cloneObject(journalmockdata);
         delete data.studentSubmission;
         data.studentSubmission = "Oh, no.";
-        console.log(data);
         ce.processSubmission(data, function(err, result)  {
             try {
                 expect(result.correctness).to.equal(1);
                 expect(result.stats.response).to.equal('Oh, no.');
+                expect(result.stats.answerId).to.be.null;
+                done();
+            }
+            catch (e)
+            {
+                done(e);
+            }
+        });
+    });
+
+    it('should handle correct alwayscorrect submission of yet another fictional type', function (done) {
+        var data = utils.cloneObject(journalmockdata);
+        delete data.studentSubmission;
+        // This should return the first key as the result.stats.response
+        data.studentSubmission = {
+            "pantsOpinion": "Oh, no.",
+            "pantsNum": 2445
+        };
+        ce.processSubmission(data, function(err, result)  {
+            try {
+                expect(result.correctness).to.equal(1);
+                expect(result.stats.response).to.equal('Oh, no.');
+                expect(result.stats.answerId).to.be.null;
+                done();
+            }
+            catch (e)
+            {
+                done(e);
+            }
+        });
+    });
+
+    it('should handle correct alwayscorrect submission of yet another another fictional type', function (done) {
+        var data = utils.cloneObject(journalmockdata);
+        delete data.studentSubmission;
+        // This should return the first key as the result.stats.response
+        data.studentSubmission = {
+            "pantsOpinions": [
+                { "jeans": true },
+                { "leggings": true },
+                { "mensCapris": false }
+            ]
+        };
+        ce.processSubmission(data, function(err, result)  {
+            try {
+                expect(result.correctness).to.equal(1);
+                expect(result.stats.response).to.equal('student submission is not a string value');
                 expect(result.stats.answerId).to.be.null;
                 done();
             }
