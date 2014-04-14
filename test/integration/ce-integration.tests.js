@@ -92,7 +92,7 @@ describe('IPC -> CE Multiple Choice', function()
             {
 				if (err) return done(err);
                 try {
-                    console.log("@@@:"+JSON.stringify(result.body));
+                    //console.log("@@@:"+JSON.stringify(result.body));
                     expect(result.body.code).to.equal(200);
                     expect(result.body.status).to.equal('success');
                     expect(result.body.data).to.deep.equal(properReturnVal);
