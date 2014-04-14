@@ -9,5 +9,5 @@
     "logToScreen": true,
     "logToFile": true,
     "logDir": "log/",
-    "validateSchema": false
+    "validateSchema": true
 }
