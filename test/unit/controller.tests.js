@@ -64,9 +64,10 @@ describe ('CE Controller', function(){
             assert(routes, 'routes should exist');
             assert(_.isArray(routes), 'routes should be an array');
             // Routes in here must be in the same order as routes in controller.js for the following to play nicely
-            assert.strictEqual(routes.length, 2, 'there should be 2 routes in the array');
+            assert.strictEqual(routes.length, 3, 'there should be 2 routes in the array');
             assert.strictEqual(routes[0].method, 'GET', '/healthInfo should be a GET');
             assert.strictEqual(routes[1].method, 'POST', '/assessments should be a POST');
+            assert.strictEqual(routes[2].method, 'POST', '/retrieveAnswer should be a POST');
             routes.forEach(function(route) {
                 assert(_.isObject(route), 'the route should be an object');
                 assert(_.isFunction(route.handler), 'the route handler should be set correctly');
@@ -124,7 +125,7 @@ describe ('CE Controller', function(){
                 },
                 "isLastAttempt": false
             };
-            var err = Joi.validate(payload,controller.joiSchema());
+            var err = Joi.validate(payload,controller.assessmentsJoiSchema());
             expect(err).to.be.null;
             done();
         });

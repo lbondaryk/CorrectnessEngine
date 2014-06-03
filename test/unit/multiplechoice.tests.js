@@ -197,3 +197,32 @@ describe('MultipleChoice assessments', function() {
     });
 
 });
+
+/**
+ * MultipleChoice Assessment Retreive answer tests.  We have to test these through the 
+ * engine's retrieveAnswer method.
+ */
+describe('MultipleChoice retrieve answer', function() {
+    var ce = null;
+    var handler = null;
+
+    before(function () {
+        ce = new CE.EngineHandler();
+    });    
+
+    it('should retrieve the correct answer', function(done) {
+        var data = utils.cloneObject(mockdata);
+        var answerKey = data.answerKey;
+
+        ce.retrieveAnswer(answerKey, function(err, result) {
+            try {
+                expect(result.correctAnswer).to.deep.equal({ key: 'option000' });
+                done();
+            }
+            catch (e)
+            {
+                done(e);
+            }
+        });
+    });    
+});

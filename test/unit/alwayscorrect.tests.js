@@ -25,8 +25,8 @@ var MultipleChoice = require('../../lib/types/multiplechoice');
 
 var journalmockdata = require('../test_messages/journal.json');
 
-// @todo - We're just testing multiple choice through the Engine's assess methods to date.  At
-// some point we may want to test the individual methods exposed from MultipleChoice
+// @todo - We're just testing through the Engine's assess methods to date.  At
+// some point we may want to test the individual methods exposed
 // but as we're considering abstracting those at some point to a common module or a
 // base class let's hold off on that for now.
 
@@ -140,4 +140,33 @@ var journalmockdata = require('../test_messages/journal.json');
             }
         });
     });
+});
+
+/**
+ * AlwaysCorrect Assessment Retreive answer tests.  We have to test these through the 
+ * engine's retrieveAnswer method.
+ */
+describe('AlwaysCorrect retrieve answer', function() {
+    var ce = null;
+    var handler = null;
+
+    before(function () {
+        ce = new CE.EngineHandler();
+    });    
+
+    it('should retrieve the correct answer', function(done) {
+        var data = utils.cloneObject(journalmockdata);
+        var answerKey = data.answerKey;
+
+        ce.retrieveAnswer(answerKey, function(err, result) {
+            try {
+                expect(result.correctAnswer).to.be.null;
+                done();
+            }
+            catch (e)
+            {
+                done(e);
+            }
+        });
+    });    
 });
