@@ -20,7 +20,8 @@
     "q": "~0.9.7",
     "bunyan": "~0.21.4",
     "config": "~0.4.30",
-    "z-schema": "~2.0.0"
+    "z-schema": "~2.0.0",
+    "crypto": "0.0.3"
   },
   "devDependencies": {
     "mocha": "~1.12.0",
