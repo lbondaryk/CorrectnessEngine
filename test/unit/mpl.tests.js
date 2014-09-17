@@ -31,7 +31,9 @@ var mockdata = {
             "exssn": "00000-10001"
         }
     },
-    "studentSubmission": "test",
+    "studentSubmission": {
+        "entry": "test"
+    },
     "isLastAttempt": false
 };
 
@@ -91,11 +93,11 @@ describe('MPL assessments', function() {
         var data = utils.cloneObject(mockdata);
         ce.processSubmission(data, function(err, result)  {
             try {
-                console.log(err);
-                /*expect(result.correctness).to.equal(0);
-                expect(result.feedback).to.equal('This might happen but is it something is necessarily occurs?');
+                expect(result.correctness).to.equal(0);
+                //expect(result.feedback).to.equal('This might happen but is it something is necessarily occurs?');
+                expect(result.feedback).to.not.be.null;
                 expect(result.stats.response).to.not.be.null;
-                expect(result.stats.answerId).to.be.null;*/
+                expect(result.stats.answerId).to.be.null
                 done();
             }
             catch (e)
