@@ -32,7 +32,24 @@ var mockdata = {
         }
     },
     "studentSubmission": {
-        "entry": "test"
+        "entry": "test;"
+    },
+    "isLastAttempt": false
+};
+
+var sub1 = "total += 0.0;";
+var sub2 = "total = 0.0; for (k = 0; k < n; k++) total += temps[k]; avgTemp = total / double(n);"
+
+var mockdata2 = {
+    "sequenceNodeKey": "8238fsdfhe9h9shdds",
+    "answerKey": {
+        "assessmentType": "mpl",
+        "answers": {
+            "exssn": "00000-10629"
+        }
+    },
+    "studentSubmission": {
+        "entry": sub1
     },
     "isLastAttempt": false
 };
@@ -90,7 +107,7 @@ describe('MPL assessments', function() {
     });
 
     it.only('should handle incorrect submission', function (done) {
-        var data = utils.cloneObject(mockdata);
+        var data = utils.cloneObject(mockdata2);
         ce.processSubmission(data, function(err, result)  {
             try {
                 expect(result.correctness).to.equal(0);
