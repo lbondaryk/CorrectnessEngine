@@ -1,0 +1,25 @@
+{
+    "sequenceNodeKey": "8238fsdfhe9h9shdds",
+    "answerKey":
+    {
+        "assessmentType": "multivalue",
+        "answers":
+        {
+            "correctValues":
+            [
+                {
+                    "answer1": true,
+                    "answer3": true
+                }
+            ],
+            "correctResponse": "We need enough more food to support the increase in population but it isn't going to quadruple by 2050.",
+            "incorrectResponse": "Nope, sorry try again"
+        }
+    },
+    "studentSubmission": 
+    {
+      "answer1": true,
+      "answer3": true
+    },
+    "isLastAttempt": false
+}
