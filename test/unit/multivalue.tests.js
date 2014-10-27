@@ -121,7 +121,7 @@ describe('Multivalue assessments', function() {
         });
     });    
 
-    it.only('should handle correct submission', function (done) {
+    it('should handle correct submission', function (done) {
         var data = utils.cloneObject(mockdata);
         ce.processSubmission(data, function(err, result)  {
             try {
@@ -197,7 +197,7 @@ describe('Multivalue assessments', function() {
  * Multivalue Assessment Retreive answer tests.  We have to test these through the 
  * engine's retrieveAnswer method.
  */
-describe('Multivalue retrieve answer', function() {
+describe.skip('Multivalue retrieve answer', function() {
     var ce = null;
     var handler = null;
 
