@@ -23,7 +23,7 @@ var utils = require('../../lib/utils');
 var CE = require('../../lib/ce');
 var MultipleChoice = require('../../lib/types/multiplechoice');
 
-var journalmockdata = require('../test_messages/journal.json');
+var alwaysCorrectMockData = require('../test_messages/alwaysCorrect.json');
 
 // @todo - We're just testing through the Engine's assess methods to date.  At
 // some point we may want to test the individual methods exposed
@@ -42,12 +42,12 @@ var journalmockdata = require('../test_messages/journal.json');
         ce = new CE.EngineHandler();
      });
 
-    it('should handle correct alwayscorrect journal submission', function (done) {
-        var data = utils.cloneObject(journalmockdata);
+    it('should handle correct alwayscorrect submission', function (done) {
+        var data = utils.cloneObject(alwaysCorrectMockData);
         ce.processSubmission(data, function(err, result)  {
             try {
                 expect(result.correctness).to.equal(1);
-                expect(result.stats.response).to.equal('I love journals.');
+                expect(result.stats.response).to.equal('I love always correct types.');
                 expect(result.stats.answerId).to.be.null;
                 done();
             }
@@ -59,7 +59,7 @@ var journalmockdata = require('../test_messages/journal.json');
     });
 
     it('should handle correct alwayscorrect submission of some fictional type', function (done) {
-        var data = utils.cloneObject(journalmockdata);
+        var data = utils.cloneObject(alwaysCorrectMockData);
         delete data.studentSubmission.entry;
         data.studentSubmission.pants = "Oh, yeah!";
         ce.processSubmission(data, function(err, result)  {
@@ -77,7 +77,7 @@ var journalmockdata = require('../test_messages/journal.json');
     });
 
     it('should handle correct alwayscorrect submission of some other fictional type', function (done) {
-        var data = utils.cloneObject(journalmockdata);
+        var data = utils.cloneObject(alwaysCorrectMockData);
         delete data.studentSubmission;
         data.studentSubmission = "Oh, no.";
         ce.processSubmission(data, function(err, result)  {
@@ -95,7 +95,7 @@ var journalmockdata = require('../test_messages/journal.json');
     });
 
     it('should handle correct alwayscorrect submission of yet another fictional type', function (done) {
-        var data = utils.cloneObject(journalmockdata);
+        var data = utils.cloneObject(alwaysCorrectMockData);
         delete data.studentSubmission;
         // This should return the first key as the result.stats.response
         data.studentSubmission = {
@@ -117,7 +117,7 @@ var journalmockdata = require('../test_messages/journal.json');
     });
 
     it('should handle correct alwayscorrect submission of yet another another fictional type', function (done) {
-        var data = utils.cloneObject(journalmockdata);
+        var data = utils.cloneObject(alwaysCorrectMockData);
         delete data.studentSubmission;
         // This should return the first key as the result.stats.response
         data.studentSubmission = {
@@ -155,7 +155,7 @@ describe('AlwaysCorrect retrieve answer', function() {
     });    
 
     it('should retrieve the correct answer', function(done) {
-        var data = utils.cloneObject(journalmockdata);
+        var data = utils.cloneObject(alwaysCorrectMockData);
         var answerKey = data.answerKey;
 
         ce.retrieveAnswer(answerKey, function(err, result) {
