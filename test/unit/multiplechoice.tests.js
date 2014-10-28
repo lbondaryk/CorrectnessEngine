@@ -44,8 +44,7 @@ describe('MultipleChoice assessments', function() {
 
     it('should complain if answer is badly formatted', function (done) {
         var data = utils.cloneObject(mockdata);
-        // @todo - this probably doesn't work cuz you're overwriting the assessmentType so it's never hitting the validateObj
-        data.answerKey = {assessmentWrong: "thingy", answers: "string"};
+        data.answerKey = {assessmentType: "multiplechoice", assessmentWrong: "thingy", answers: "string"};
         ce.processSubmission(data, function(err, result)  {
             try {
                 expect(err).to.not.be.null;

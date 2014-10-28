@@ -1,8 +1,12 @@
 {
     "sequenceNodeKey": "bbbb8238fsdfhe9h9shdds",
     "answerKey": {
-        "assessmentType": "discussions"
-        },
+        "assessmentType": "discussions",
+        "answers": {
+        	"topicId": "2937859238572938",
+        	"authorId": "2893982r"
+        }
+    },
     "studentSubmission": { "entry": "I love journals."},
     "isLastAttempt": true
 }

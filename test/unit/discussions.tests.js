@@ -42,12 +42,31 @@ var journalmockdata = require('../test_messages/journal.json');
         ce = new CE.EngineHandler();
      });
 
+    it('should complain if answer is badly formatted', function (done) {
+        var data = utils.cloneObject(journalmockdata);
+        data.answerKey = {assessmentType: "discussions", assessmentWrong: "thingy", answers: "string"};
+        ce.processSubmission(data, function(err, result)  {
+            try {
+                expect(err).to.not.be.null;
+                //expect(err.message).to.equal('Validation failed');
+                expect(result).to.be.null;
+                done();
+            }
+            catch (e)
+            {
+                done(e);
+            }
+        });
+    });
+
     it('should handle correct discussions journal submission', function (done) {
         var data = utils.cloneObject(journalmockdata);
         ce.processSubmission(data, function(err, result)  {
             try {
                 expect(result.correctness).to.equal(1);
                 expect(result.discussions).to.be.true;
+                expect(result.authorId).to.equal(data.answerKey.answers.authorId);
+                expect(result.topicId).to.equal(data.answerKey.answers.topicId);
                 expect(result.stats.itemResponseText).to.equal('I love journals.');
                 expect(result.stats.answerId).to.be.null;
                 expect(result.stats.assessmentItemQuestionType).to.equal('SimpleWriting');
