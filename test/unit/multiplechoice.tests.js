@@ -102,6 +102,7 @@ describe('MultipleChoice assessments', function() {
                 expect(result.feedback).to.equal('This might happen but is it something is necessarily occurs?');
                 expect(result.stats.response).to.be.null;
                 expect(result.stats.answerId).to.equal('option003');
+                expect(result.stats.assessmentItemQuestionType).to.equal('MultipleChoice');
                 done();
             }
             catch (e)
@@ -120,6 +121,7 @@ describe('MultipleChoice assessments', function() {
                 expect(result.feedback).to.equal('Your answer <%= studAnsValue %> is correct. Growth rate stays constant.');
                 expect(result.stats.response).to.be.null;
                 expect(result.stats.answerId).to.equal('option000');
+                expect(result.stats.assessmentItemQuestionType).to.equal('MultipleChoice');
                 done();
             }
             catch (e)
@@ -141,6 +143,7 @@ describe('MultipleChoice assessments', function() {
                 expect(result.correctAnswer.feedback).to.equal('Your answer <%= studAnsValue %> is correct. Growth rate stays constant.');
                 expect(result.stats.response).to.be.null;
                 expect(result.stats.answerId).to.equal('option003');
+                expect(result.stats.assessmentItemQuestionType).to.equal('MultipleChoice');
                 done();
             }
             catch (e)
@@ -166,6 +169,7 @@ describe('MultipleChoice assessments', function() {
                 expect(result.correctAnswer.feedback).to.equal('');
                 expect(result.stats.response).to.be.null;
                 expect(result.stats.answerId).to.equal('option003');
+                expect(result.stats.assessmentItemQuestionType).to.equal('MultipleChoice');
                 done();
             }
             catch (e)
@@ -187,6 +191,7 @@ describe('MultipleChoice assessments', function() {
                 expect(result.correctAnswer).to.be.null;
                 expect(result.stats.response).to.be.null;
                 expect(result.stats.answerId).to.equal('option003');
+                expect(result.stats.assessmentItemQuestionType).to.equal('MultipleChoice');
                 done();
             }
             catch (e)

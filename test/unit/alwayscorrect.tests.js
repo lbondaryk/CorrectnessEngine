@@ -48,7 +48,8 @@ var alwaysCorrectMockData = require('../test_messages/alwaysCorrect.json');
             try {
                 expect(result.correctness).to.equal(1);
                 expect(result.stats.response).to.equal('I love always correct types.');
-                expect(result.stats.answerId).to.be.null;
+                expect(result.stats.answerId).to.be.null;                
+                expect(result.stats.assessmentItemQuestionType).to.equal('AlwaysCorrect');
                 done();
             }
             catch (e)
@@ -66,7 +67,8 @@ var alwaysCorrectMockData = require('../test_messages/alwaysCorrect.json');
             try {
                 expect(result.correctness).to.equal(1);
                 expect(result.stats.response).to.equal('Oh, yeah!');
-                expect(result.stats.answerId).to.be.null;
+                expect(result.stats.answerId).to.be.null;                
+                expect(result.stats.assessmentItemQuestionType).to.equal('AlwaysCorrect');
                 done();
             }
             catch (e)
@@ -84,7 +86,8 @@ var alwaysCorrectMockData = require('../test_messages/alwaysCorrect.json');
             try {
                 expect(result.correctness).to.equal(1);
                 expect(result.stats.response).to.equal('Oh, no.');
-                expect(result.stats.answerId).to.be.null;
+                expect(result.stats.answerId).to.be.null;                
+                expect(result.stats.assessmentItemQuestionType).to.equal('AlwaysCorrect');
                 done();
             }
             catch (e)
@@ -106,7 +109,8 @@ var alwaysCorrectMockData = require('../test_messages/alwaysCorrect.json');
             try {
                 expect(result.correctness).to.equal(1);
                 expect(result.stats.response).to.equal('Oh, no.');
-                expect(result.stats.answerId).to.be.null;
+                expect(result.stats.answerId).to.be.null;                
+                expect(result.stats.assessmentItemQuestionType).to.equal('AlwaysCorrect');
                 done();
             }
             catch (e)
@@ -131,7 +135,8 @@ var alwaysCorrectMockData = require('../test_messages/alwaysCorrect.json');
             try {
                 expect(result.correctness).to.equal(1);
                 expect(result.stats.response).to.equal('student submission is not a string value');
-                expect(result.stats.answerId).to.be.null;
+                expect(result.stats.answerId).to.be.null;                
+                expect(result.stats.assessmentItemQuestionType).to.equal('AlwaysCorrect');
                 done();
             }
             catch (e)

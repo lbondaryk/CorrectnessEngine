@@ -89,7 +89,8 @@ describe('Multivalue assessments', function() {
                 expect(result.correctness).to.equal(0);
                 expect(result.feedback).to.equal('Nope, sorry try again');
                 expect(result.stats.response).to.be.null;
-                expect(result.stats.answerId).to.be.null;
+                expect(result.stats.answerId).to.be.null;                
+                expect(result.stats.assessmentItemQuestionType).to.equal('MultiValue');
                 done();
             }
             catch (e)
@@ -111,7 +112,8 @@ describe('Multivalue assessments', function() {
                 expect(result.correctness).to.equal(0);
                 expect(result.feedback).to.equal('Nope, sorry try again');
                 expect(result.stats.response).to.be.null;
-                expect(result.stats.answerId).to.be.null;
+                expect(result.stats.answerId).to.be.null;                
+                expect(result.stats.assessmentItemQuestionType).to.equal('MultiValue');
                 done();
             }
             catch (e)
@@ -128,7 +130,8 @@ describe('Multivalue assessments', function() {
                 expect(result.correctness).to.equal(1);
                 expect(result.feedback).to.equal("We need enough more food to support the increase in population but it isn't going to quadruple by 2050.");
                 expect(result.stats.response).to.be.null;
-                expect(result.stats.answerId).to.be.null;
+                expect(result.stats.answerId).to.be.null;                
+                expect(result.stats.assessmentItemQuestionType).to.equal('MultiValue');
                 done();
             }
             catch (e)
@@ -155,7 +158,8 @@ describe('Multivalue assessments', function() {
                 //expect(result.correctAnswer.key).to.equal('option000');
                 //expect(result.correctAnswer.feedback).to.equal('Your answer <%= studAnsValue %> is correct. Growth rate stays constant.');
                 expect(result.stats.response).to.be.null;
-                expect(result.stats.answerId).to.be.null;
+                expect(result.stats.answerId).to.be.null;                
+                expect(result.stats.assessmentItemQuestionType).to.equal('MultiValue');
                 done();
             }
             catch (e)
@@ -181,7 +185,8 @@ describe('Multivalue assessments', function() {
                 expect(result.correctAnswer.key).to.equal('option000');
                 expect(result.correctAnswer.feedback).to.equal('');
                 expect(result.stats.response).to.be.null;
-                expect(result.stats.answerId).to.equal('option003');
+                expect(result.stats.answerId).to.equal('option003');                
+                expect(result.stats.assessmentItemQuestionType).to.equal('MultiValue');
                 done();
             }
             catch (e)
