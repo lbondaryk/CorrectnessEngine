@@ -66,7 +66,7 @@ describe('Multivalue assessments', function() {
         ce.processSubmission(data, function(err, result)  {
             try {
                 expect(err).to.not.be.null;
-                console.log(err);
+                //console.log(err);
                 //expect(err.message).to.equal('Validation failed');
                 expect(result).to.be.null;
                 done();
