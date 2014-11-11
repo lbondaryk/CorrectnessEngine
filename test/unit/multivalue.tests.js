@@ -91,6 +91,7 @@ describe('Multivalue assessments', function() {
                 expect(result.stats.response).to.be.null;
                 expect(result.stats.answerId).to.be.null;                
                 expect(result.stats.assessmentItemQuestionType).to.equal('MultiValue');
+                expect(result.keyValueFeedback).to.deep.equal({ answer1: false, answer2: true });
                 done();
             }
             catch (e)
