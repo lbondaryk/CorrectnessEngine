@@ -46,7 +46,7 @@ describe('IPC -> CE Multiple Choice', function()
             "correctness": 0,
             "feedback": "Does the fertility rate change with population size?",
             "correctAnswer": null,
-            "stats": {"answerId":"option002", "response":null}
+            "stats": {"answerId":"option002", "response":null, "assessmentItemQuestionType":"MultipleChoice"}
         };
         var message = utils.cloneObject(multiplechoice_incorrect_notlast);
         request(server.listener)
@@ -79,7 +79,7 @@ describe('IPC -> CE Multiple Choice', function()
                 "key": "option000",
                 "feedback": "Your answer <%= studAnsValue %> is correct. Growth rate stays constant."
             },
-            "stats": {"answerId":"option003", "response":null}
+            "stats": {"answerId":"option003", "response":null, "assessmentItemQuestionType":"MultipleChoice"}
         };
 		var message = utils.cloneObject(multiplechoice_incorrect_last);
 		request(server.listener)
@@ -109,7 +109,7 @@ describe('IPC -> CE Multiple Choice', function()
             "correctness": 0,
             "feedback": "This might happen but is it something is necessarily occurs?",
             "correctAnswer": null,
-            "stats": {"answerId":"option003", "response":null}
+            "stats": {"answerId":"option003", "response":null, "assessmentItemQuestionType":"MultipleChoice"}
         };
 		var message = utils.cloneObject(multiplechoice_incorrect_last);
 		message.isLastAttempt = false;
@@ -140,7 +140,7 @@ describe('IPC -> CE Multiple Choice', function()
             "correctness": 1,
             "feedback": "Your answer <%= studAnsValue %> is correct. Growth rate stays constant.",
             "correctAnswer": null,
-            "stats": {"answerId":"option000", "response":null}
+            "stats": {"answerId":"option000", "response":null, "assessmentItemQuestionType":"MultipleChoice"}
         };
 		var message = utils.cloneObject(multiplechoice_incorrect_last);
 		message.studentSubmission.key = "option000";
