@@ -65,8 +65,8 @@ var journalmockdata = require('../test_messages/journal.json');
             try {
                 expect(result.correctness).to.equal(1);
                 expect(result.discussions).to.be.true;
-                expect(result.authorId).to.equal(data.answerKey.answers.authorId);
-                expect(result.topicId).to.equal(data.answerKey.answers.topicId);
+                expect(result.brixState.authorId).to.equal(data.answerKey.answers.authorId);
+                expect(result.brixState.topicId).to.equal(data.answerKey.answers.topicId);
                 // @todo - this is the 2.1 code line.  remove the 'response' line.
                 //expect(result.stats.itemResponseText).to.equal('I love journals.');
                 expect(result.stats.response).to.equal('I love journals.');

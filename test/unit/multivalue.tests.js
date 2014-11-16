@@ -91,7 +91,7 @@ describe('Multivalue assessments', function() {
                 expect(result.stats.response).to.be.null;
                 expect(result.stats.answerId).to.be.null;                
                 expect(result.stats.assessmentItemQuestionType).to.equal('MultiValue');
-                expect(result.keyValueFeedback).to.deep.equal({ answer1: true, answer2: false });
+                expect(result.brixState.keyValueFeedback).to.deep.equal({ answer1: true, answer2: false });
                 done();
             }
             catch (e)
