@@ -9,5 +9,11 @@
     "logToScreen": true,
     "logToFile": true,
     "logDir": "log/",
-    "validateSchema": true
+    "validateSchema": true,
+
+    "turingsCraft": {
+    	"baseUrl": "https://dev.turingscraft.com:39484",
+    	"apiKey": "API_TESTER",
+    	"apiSecret": "1234567890"
+    }
 }

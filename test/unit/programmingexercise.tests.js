@@ -114,7 +114,8 @@ describe('ProgrammingExercise assessments', function() {
                 expect(result.correctness).to.equal(0);
                 //console.log(result);
                 //expect(result.feedback).to.equal('This might happen but is it something is necessarily occurs?');
-                expect(result.feedback).to.not.be.null;
+                expect(result.feedback).to.be.null;
+                expect(result.brixState.codeEvaluation).to.be.an('object');
                 expect(result.stats.response).to.not.be.null;
                 expect(result.stats.answerId).to.be.null;
                 expect(result.stats.assessmentItemQuestionType).to.equal('ProgrammingExercise');
@@ -128,14 +129,16 @@ describe('ProgrammingExercise assessments', function() {
     });
 
     it.skip('should handle correct submission', function (done) {
-        var data = utils.cloneObject(mockdata);
-        data.studentSubmission.key = "option000";
+        var data = utils.cloneObject(mockdata2);
+        data.studentSubmission.entry = sub2;
         ce.processSubmission(data, function(err, result)  {
             try {
                 expect(result.correctness).to.equal(1);
-                expect(result.feedback).to.equal('Your answer <%= studAnsValue %> is correct. Growth rate stays constant.');
-                expect(result.stats.response).to.be.null;
-                expect(result.stats.answerId).to.equal('option000');
+                expect(result.feedback).to.be.null;
+                expect(result.brixState.codeEvaluation).to.be.an('object');
+                //expect(result.stats.response).to.be.null;
+                //@todo - fix this
+                //expect(result.stats.answerId).to.equal('option000');
                 expect(result.stats.assessmentItemQuestionType).to.equal('ProgrammingExercise');
                 done();
             }

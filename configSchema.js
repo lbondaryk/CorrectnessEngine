@@ -11,5 +11,6 @@ module.exports = {
     "logToFile":            Joi.Types.Boolean(),
     "logDir":               Joi.types.String(),
     "logAllowWebAccess":    Joi.types.Boolean().optional(),
-    "validateSchema":       Joi.types.Boolean()
+    "validateSchema":       Joi.types.Boolean(),
+    "turingsCraft":         Joi.Types.Object().required() 
 };

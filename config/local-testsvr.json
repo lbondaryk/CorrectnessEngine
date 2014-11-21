@@ -7,5 +7,11 @@
 
     "logLevel": "info",
     "logToScreen": true,
-    "logToFile": true
+    "logToFile": true,
+
+    "turingsCraft": {
+    	"baseUrl": "https://dev.turingscraft.com:39484",
+    	"apiKey": "API_TESTER",
+    	"apiSecret": "1234567890"
+    }
 }
