@@ -18,6 +18,7 @@ var sinon = require('sinon');
 var nock = require('nock');
 var expect = require('chai').expect;
 var config = require('config');
+var _ = require('underscore');
 
 var utils = require('../../lib/utils');
 var CE = require('../../lib/ce');
@@ -233,13 +234,13 @@ describe('ProgrammingExercise retrieve answer', function() {
         ce = new CE.EngineHandler();
     });    
 
-    it.skip('should retrieve the correct answer', function(done) {
+    it('should return null if there is no correct answer', function(done) {
         var data = utils.cloneObject(mockdata);
         var answerKey = data.answerKey;
 
         ce.retrieveAnswer(answerKey, function(err, result) {
             try {
-                expect(result.correctAnswer).to.deep.equal({ key: 'option000' });
+                expect(result.correctAnswer).to.be.null;
                 done();
             }
             catch (e)
@@ -247,5 +248,70 @@ describe('ProgrammingExercise retrieve answer', function() {
                 done(e);
             }
         });
-    });    
+    });
+
+    it('should return null if there is no code property', function(done) {
+        var data = utils.cloneObject(mockdata);
+        var answerKey = data.answerKey;
+        var answers = answerKey.answers;
+        _.extend(answerKey.answers,
+            {
+                "codeExamples": []
+            });
+
+        ce.retrieveAnswer(answerKey, function(err, result) {
+            try {
+                expect(result.correctAnswer).to.be.null;
+                done();
+            }
+            catch (e)
+            {
+                done(e);
+            }
+        });
+    });
+
+    it('should return a the first correct answer if there is one', function(done) {
+        var data = utils.cloneObject(mockdata);
+        var answerKey = data.answerKey;
+        var answers = answerKey.answers;
+
+        var codeArray1 = [
+            "for (total = 0.0, k = 0; k < n; k++) { \u00a0\u00a0\u00a0\u00a0total += temps[k]; avgTemp = total / n;} "
+        ];
+        var codeArray2 = [
+                            "for (total = 0.0, k = 0; k < n; k++)",
+                            "{",
+                            "\u00a0\u00a0\u00a0\u00a0total += temps[k];",
+                            "}",
+                            "",
+                            "avgTemp = total / n;"
+                        ];
+
+        _.extend(answerKey.answers,
+            {
+                "codeExamples":
+                [
+                    {
+                        "code": codeArray1
+                    },
+                    {
+                        "code": codeArray2
+                    }
+                ]
+            });
+
+        ce.retrieveAnswer(answerKey, function(err, result) {
+            try {
+                expect(result.correctAnswer.correctCode).to.deep.equal(codeArray1);
+                expect(result.correctAnswer.correctCode).to.not.deep.equal(codeArray2);
+                done();
+            }
+            catch (e)
+            {
+                done(e);
+            }
+        });
+    });   
+       
 });
