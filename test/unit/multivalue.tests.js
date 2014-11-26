@@ -154,10 +154,9 @@ describe('Multivalue assessments', function() {
             try {
                 expect(result.correctness).to.equal(0);
                 expect(result.feedback).to.equal('Nope, sorry try again');
-                //@todo - if you add correctAnswer back in, this will be an object, not null.
-                expect(result.correctAnswer).to.be.null;
-                //expect(result.correctAnswer.key).to.equal('option000');
-                //expect(result.correctAnswer.feedback).to.equal('Your answer <%= studAnsValue %> is correct. Growth rate stays constant.');
+                expect(result.correctAnswer.keyValues).to.be.an('object');
+                expect(result.correctAnswer.keyValues).to.deep.equal({answer1: true, answer3: true});
+
                 expect(result.stats.response).to.be.null;
                 expect(result.stats.answerId).to.be.null;                
                 expect(result.stats.assessmentItemQuestionType).to.equal('MultiValue');
@@ -169,41 +168,13 @@ describe('Multivalue assessments', function() {
             }
         });
     });
-
-    //@todo - add this back when you figure out correctAnswer
-    it.skip('should report back the correct answer with empty feedback string if isLastAttempt is true', function (done) {
-        var data = utils.cloneObject(mockdata);
-        // set an incorrect answer, just for fun.
-        data.studentSubmission.key = "option003";
-        // remove the feedback value from the correct answer
-        data.answerKey.answers.option000.response = "";
-
-        ce.processSubmission(data, function(err, result)  {
-            try {
-                //console.log(JSON.stringify(result));
-                expect(result.correctness).to.equal(0);
-                expect(result.feedback).to.equal('This might happen but is it something is necessarily occurs?');
-                expect(result.correctAnswer.key).to.equal('option000');
-                expect(result.correctAnswer.feedback).to.equal('');
-                expect(result.stats.response).to.be.null;
-                expect(result.stats.answerId).to.equal('option003');                
-                expect(result.stats.assessmentItemQuestionType).to.equal('MultiValue');
-                done();
-            }
-            catch (e)
-            {
-                done(e);
-            }
-        });
-    });
-
 });
 
 /**
  * Multivalue Assessment Retreive answer tests.  We have to test these through the 
  * engine's retrieveAnswer method.
  */
-describe.skip('Multivalue retrieve answer', function() {
+describe('Multivalue retrieve answer', function() {
     var ce = null;
     var handler = null;
 
@@ -217,7 +188,7 @@ describe.skip('Multivalue retrieve answer', function() {
 
         ce.retrieveAnswer(answerKey, function(err, result) {
             try {
-                expect(result.correctAnswer).to.deep.equal({ "answer1": true, "answer3": true });
+                expect(result.correctAnswer.keyValues).to.deep.equal({ "answer1": true, "answer3": true });
                 done();
             }
             catch (e)
