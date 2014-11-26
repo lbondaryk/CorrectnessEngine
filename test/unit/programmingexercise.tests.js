@@ -250,18 +250,20 @@ describe('ProgrammingExercise retrieve answer', function() {
         });
     });
 
-    it('should return null if there is no code property', function(done) {
+    it('should return an empty array if that is what is in the config', function(done) {
         var data = utils.cloneObject(mockdata);
         var answerKey = data.answerKey;
         var answers = answerKey.answers;
+
+        var codeExamples = [];
         _.extend(answerKey.answers,
             {
-                "codeExamples": []
+                "codeExamples": codeExamples
             });
 
         ce.retrieveAnswer(answerKey, function(err, result) {
             try {
-                expect(result.correctAnswer).to.be.null;
+                expect(result.correctAnswer.codeExamples).to.deep.equal(codeExamples);
                 done();
             }
             catch (e)
@@ -271,7 +273,7 @@ describe('ProgrammingExercise retrieve answer', function() {
         });
     });
 
-    it('should return a the first correct answer if there is one', function(done) {
+    it('should return all the codeExamples', function(done) {
         var data = utils.cloneObject(mockdata);
         var answerKey = data.answerKey;
         var answers = answerKey.answers;
@@ -303,8 +305,8 @@ describe('ProgrammingExercise retrieve answer', function() {
 
         ce.retrieveAnswer(answerKey, function(err, result) {
             try {
-                expect(result.correctAnswer.correctCode).to.deep.equal(codeArray1);
-                expect(result.correctAnswer.correctCode).to.not.deep.equal(codeArray2);
+                expect(result.correctAnswer.codeExamples[0].code).to.deep.equal(codeArray1);
+                expect(result.correctAnswer.codeExamples[1].code).to.deep.equal(codeArray2);
                 done();
             }
             catch (e)
