@@ -30,7 +30,16 @@ var mockdata = {
     "answerKey": {
         "assessmentType": "programmingexercise",
         "answers": {
-            "exerciseId": "00000-10001"
+            "exerciseId": "00000-10001",
+            "codeExamples":
+            [
+                {
+                    "code":
+                    [
+                        "for (total = 0.0, k = 0; k < n; k++)"
+                    ]
+                }
+            ]
         }
     },
     "studentSubmission": {
@@ -47,7 +56,21 @@ var mockdata2 = {
     "answerKey": {
         "assessmentType": "programmingexercise",
         "answers": {
-            "exerciseId": "00000-10629"
+            "exerciseId": "00000-10629",
+            "codeExamples":
+            [
+                {
+                    "code":
+                    [
+                        "for (total = 0.0, k = 0; k < n; k++)",
+                        "{",
+                        "    total += temps[k];",
+                        "}",
+                        "",
+                        "avgTemp = total / n;"
+                    ]
+                }
+            ]
         }
     },
     "studentSubmission": {
@@ -95,6 +118,12 @@ describe('ProgrammingExercise assessments', function() {
                 expect(result.correctness).to.equal(1);
                 expect(result.feedback).to.be.null;
                 expect(result.brixState.codeEvaluation).to.be.an('object');
+
+                // Verify a correct answer return with correct submission
+                expect(result.correctAnswer).to.be.an('object');
+                expect(result.correctAnswer.codeExamples).to.be.an('array');
+                expect(result.correctAnswer.codeExamples[0].code).to.be.an('array');
+
                 expect(result.stats.assessmentItemQuestionType).to.equal('ProgrammingExercise');
                 done();
             }
@@ -105,16 +134,23 @@ describe('ProgrammingExercise assessments', function() {
         });
     });
 
-    // @todo - this is bs copied from mcq
-    it.skip('should report back the correct answer if isLastAttempt is true', function (done) {
-        var data = utils.cloneObject(mockdata);
-        
+    it('should report back the correct answer if isLastAttempt is true', function (done) {
+        var data = utils.cloneObject(mockdata2);
+        data.isLastAttempt = true;
+
         ce.processSubmission(data, function(err, result)  {
             try {
-                console.log(JSON.stringify(result));
-                console.log(result);
                 expect(result.correctness).to.equal(0);
-                expect(result.stats.response).to.be.null;
+                expect(result.feedback).to.be.null;
+                expect(result.brixState.codeEvaluation).to.be.an('object');
+                expect(result.stats.response).to.not.be.null;
+                expect(result.stats.answerId).to.be.null;
+
+                // Verify a correct answer return with correct submission
+                expect(result.correctAnswer).to.be.an('object');
+                expect(result.correctAnswer.codeExamples).to.be.an('array');
+                expect(result.correctAnswer.codeExamples[0].code).to.be.an('array');
+
                 expect(result.stats.assessmentItemQuestionType).to.equal('ProgrammingExercise');
                 done();
             }

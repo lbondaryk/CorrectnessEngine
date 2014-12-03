@@ -46,7 +46,21 @@ var mockdata2 = {
     "answerKey": {
         "assessmentType": "programmingexercise",
         "answers": {
-            "exerciseId": "00000-10629"
+            "exerciseId": "00000-10629",
+            "codeExamples":
+            [
+                {
+                    "code":
+                    [
+                        "for (total = 0.0, k = 0; k < n; k++)",
+                        "{",
+                        "    total += temps[k];",
+                        "}",
+                        "",
+                        "avgTemp = total / n;"
+                    ]
+                }
+            ]
         }
     },
     "studentSubmission": {
