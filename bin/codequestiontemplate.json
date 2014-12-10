@@ -1,0 +1,73 @@
+{
+    "description": "A Sample Activity containing a single CodeQuestion bric",
+    "targetSelectorValues": [ "code-cntr" ],
+
+    "containerConfig":
+    [
+        {
+            "description": "container for the code question exercise",
+            "containerId": "code-cntr",
+            "brixConfig":
+            [
+                {
+                    "bricId": "CQ1",
+                    "bricType": "CodeQuestion",
+                    "config":
+                    {
+                        "id": "sampleCQ1",
+                        "title": "C Programming Language Exercise ",
+                        "exercise": ""
+                    },
+                    "configFixup":
+                    [
+                        {
+                            "type": "set-property",
+                            "name": "codeQuestionId",
+                            "value": { "type": "ref", "domain": "info", "refId": "sequenceNodeKey" }
+                        },
+                        {
+                            "type": "set-property",
+                            "name": "maxAttempts",
+                            "value": { "type": "ref", "domain": "info", "refId": "maxAttempts"}
+                        }
+                    ],
+                    "answerKey":
+                    {
+                        "assessmentType": "programmingexercise",
+                        "answers":
+                        {
+                            "exerciseId": "",
+                            "codeExamples":
+                            [
+                                
+                            ]
+                        }
+                    }
+                }
+            ],
+            "hookupActions":
+            [
+                {
+                    "description": "Hookup the submit manager to evaluate answers",
+                    "type": "method-call",
+                    "instance": { "type": "submit-manager" },
+                    "methodName": "handleRequestsFrom",
+                    "args":
+                    [
+                        { "type": "ref", "domain": "brix", "refId": "CQ1" }
+                    ]
+                },
+                {
+                    "description": "Draw the code question",
+                    "type": "method-call",
+                    "instance": { "type": "ref", "domain": "brix", "refId": "CQ1" },
+                    "methodName": "draw",
+                    "args":
+                    [
+                        { "type": "d3select", "targetSelectorIndex": "0" }
+                    ]
+                }
+            ]
+        }
+    ]
+}
