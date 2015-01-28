@@ -8,7 +8,8 @@
     "logLevel": "trace",
     "logToScreen": false,
     "logToFile": true,
-    "logDir": "/home/ubuntu/applications/log/",
+    //"logDir": "/home/ubuntu/applications/log/",
+    "logDir": "/mnt/brix/log",
     "validateSchema": true,
 
     "turingsCraft": {

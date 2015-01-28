@@ -8,7 +8,8 @@
     "logLevel": "info",
     "logToScreen": false,
     "logToFile": true,
-    "logDir": "/home/ubuntu/applications/log/",
+    //"logDir": "/home/ubuntu/applications/log/",
+    "logDir": "/mnt/brix/log",
     "logAllowWebAccess": true,
     
     "validateSchema": false,
