@@ -15,7 +15,9 @@
     "validateSchema": false,
 
     "turingsCraft": {
-        "baseUrl": "https://codelab3.turingscraft.com",
+        // temporarily set to the TC dev server to facilitate 2.2 testing
+        "baseUrl": "https://dev.turingscraft.com:39484",
+        //"baseUrl": "https://codelab3.turingscraft.com",
         "apiKey": "94Mnpe7gb2d4Pxxmp2PY",
         "apiSecret": "WqB2xx9NN63TXzJNNcXfnPyQ"
     }

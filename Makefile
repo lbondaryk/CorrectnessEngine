@@ -25,10 +25,10 @@ test-cov-html:
 	@NODE_ENV=test ./node_modules/.bin/mocha --require blanket --recursive --timeout 3000 -R html-cov test/unit > test/coverage.html
 
 test-int:
-	@NODE_ENV=test ./node_modules/.bin/mocha --recursive --reporter tap --timeout 3000 test/integration
+	@NODE_ENV=test ./node_modules/.bin/mocha --recursive --reporter tap --timeout 9000 test/integration
 
 test-int-spec:
-	@NODE_ENV=test ./node_modules/.bin/mocha --recursive --reporter spec --timeout 3000 test/integration	
+	@NODE_ENV=test ./node_modules/.bin/mocha --recursive --reporter spec --timeout 9000 test/integration	
 	 
 test-xunit:
 	@NODE_ENV=test ./node_modules/.bin/mocha --recursive --reporter xunit --timeout 3000 test/unit > test-reports.log.xml
