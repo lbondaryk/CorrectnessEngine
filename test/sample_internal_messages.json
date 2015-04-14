@@ -1,0 +1,150 @@
+/*
+ ********** Multiple Choice Question **********
+ */
+payload = {
+    "isLastAttempt": false,
+    "sequenceNodeKey": "fb9ab796442d988d2f83309f67f1a9fe",
+    "answerKey": {
+        "assessmentType": "multiplechoice",
+        "answers": {
+            "answer1": {
+                "score": 0,
+                "response": "We need enough more food to support the increase in population but it isn't going to quadruple by 2050."
+            },
+            "answer2": {
+                "score": 0,
+                "response": ""
+            },
+            "answer3": {
+                "score": 0,
+                "response": ""
+            },
+            "answer4": {
+                "score": 1,
+                "response": "The energy used per person is increasing at the same time the population is increasing so we're going to need three times as much energy."
+            }
+        }
+    },
+    "studentSubmission": {
+        "key": "answer2"
+    }
+}
+
+// Prior calling calculateStats()
+returnData = {
+    "correctness":0,
+    "feedback":""
+}
+
+/*
+ ********** MultiSelect **********
+ */
+payload = {
+    "isLastAttempt": false,
+    "sequenceNodeKey": "f70eed756c1f5a6e766da8a4fc0ba651",
+    "answerKey": {
+        "assessmentType": "multivalue",
+        "answers": {
+            "correctValues": [
+                {
+                    "answer1": true,
+                    "answer2": true
+                }
+            ],
+            "correctResponse": "You know your body parts.",
+            "incorrectResponse": "Nope, sorry try again"
+        }
+    },
+    "studentSubmission": {
+        "answer4": true,
+        "answer2": true
+    }
+}
+returnData  = {
+    "correctness": 0,
+    "feedback": "Nope, sorry try again",
+    // This structure is only set when there is at least one incorrect
+    "brixState": {
+        "keyValueFeedback": {
+            "answer4": false,
+            "answer2": true
+        }
+    }
+}
+
+/*
+ ********** Drag & Drop **********
+ */
+payload = {
+    "isLastAttempt": false,
+    "sequenceNodeKey": "1b3127f84634d3ce192dc10eeb9fc0df",
+    "answerKey": {
+        "assessmentType": "multivalue",
+        "answers": {
+            "correctValues": [
+                {
+                    "answer1": "value1",
+                    "answer2": "value2",
+                    "answer3": "value3",
+                    "answer4": "value4"
+                }
+            ]
+        }
+    },
+    "studentSubmission": {
+        "answer7": "value1",
+        "answer5": "value2",
+        "answer3": "value4"
+    }
+}
+
+// Prior 
+returnData = {
+    "correctness": 0,
+    "brixState": {
+        "keyValueFeedback": {
+            "answer7": false,
+            "answer5": false,
+            "answer3": false
+        }
+    }
+}
+
+/*
+ ********** Binning **********
+ */
+payload = {
+    "isLastAttempt": false,
+    "sequenceNodeKey": "0e12c9f3b4e21a409b756f5373a9e989",
+    "answerKey": {
+        "assessmentType": "multivalue",
+        "answers": {
+            "correctValues": [
+                {
+                    "answer1": "bin1",
+                    "answer2": "bin1",
+                    "answer3": "bin3",
+                    "answer4": "bin4",
+                    "answer5": "bin5",
+                    "answer6": "bin6"
+                }
+            ]
+        }
+    },
+    "studentSubmission": {
+        "answer1": "bin2",
+        "answer2": "bin2",
+        "answer4": "bin4"
+    }
+}
+
+returnData = {
+    "correctness": 0,
+    "brixState": {
+        "keyValueFeedback": {
+            "answer1": false,
+            "answer2": false,
+            "answer4": true
+        }
+    }
+}

@@ -581,7 +581,7 @@ describe('Numeric assessments', function() {
                             done(e);
                         }
                     });
-            });    
+            });
 
             it('should handle correct submission', function (done) {
                 var data = utils.cloneObject(mockdata);
@@ -670,7 +670,7 @@ describe('Numeric assessments', function() {
                             done(e);
                         }
                     });
-            });    
+            });
         });
     });
 });

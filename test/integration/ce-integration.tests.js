@@ -46,7 +46,22 @@ describe('IPC -> CE Multiple Choice', function()
             "correctness": 0,
             "feedback": "Does the fertility rate change with population size?",
             "correctAnswer": null,
-            "stats": {"answerId":"option002", "response":null, "assessmentItemQuestionType":"MultipleChoice"}
+            //"stats": {"answerId":"option002", "response":null, "assessmentItemQuestionType":"MultipleChoice"}
+            "stats": {
+                "assessmentItemQuestionType":"MultipleChoice",
+                "answerId":"option002",
+                "response":null,
+                "typeCode":"Multi_Value_Question_User_Answered",
+                "extensions":{
+                    "Assessment_Item_Question_Type":"MultiValue",
+                    "Assessment_Item_Response_Code":"Incorrect",
+                    "Student_Response":[{
+                        "Target_Id":"target",
+                        "Answer_Id":"option002",
+                        "Target_Sub_Question_Response_Code":"Incorrect"
+                    }]
+                }
+            }
         };
         var message = utils.cloneObject(multiplechoice_incorrect_notlast);
         request(server.listener)
@@ -59,7 +74,7 @@ describe('IPC -> CE Multiple Choice', function()
             {
                 if (err) return done(err);
                 try {
-                    //console.log("@@@:"+JSON.stringify(result.body));
+                    //console.log("---:"+JSON.stringify(result.body.data.stats));
                     expect(result.body.code).to.equal(200);
                     expect(result.body.status).to.equal('success');
                     expect(result.body.data).to.deep.equal(properReturnVal);
@@ -79,7 +94,22 @@ describe('IPC -> CE Multiple Choice', function()
                 "key": "option000",
                 "feedback": "Your answer <%= studAnsValue %> is correct. Growth rate stays constant."
             },
-            "stats": {"answerId":"option003", "response":null, "assessmentItemQuestionType":"MultipleChoice"}
+            //"stats": {"answerId":"option003", "response":null, "assessmentItemQuestionType":"MultipleChoice"}
+            "stats": {
+                "assessmentItemQuestionType":"MultipleChoice",
+                "answerId":"option003",
+                "response":null,
+                "typeCode":"Multi_Value_Question_User_Answered",
+                "extensions":{
+                    "Assessment_Item_Question_Type": "MultiValue",
+                    "Assessment_Item_Response_Code": "Incorrect",
+                    "Student_Response":[{
+                        "Target_Id":"target",
+                        "Answer_Id":"option003",
+                        "Target_Sub_Question_Response_Code": "Incorrect"
+                    }]
+                }
+            }
         };
 		var message = utils.cloneObject(multiplechoice_incorrect_last);
 		request(server.listener)
@@ -109,7 +139,22 @@ describe('IPC -> CE Multiple Choice', function()
             "correctness": 0,
             "feedback": "This might happen but is it something is necessarily occurs?",
             "correctAnswer": null,
-            "stats": {"answerId":"option003", "response":null, "assessmentItemQuestionType":"MultipleChoice"}
+            //"stats": {"answerId":"option003", "response":null, "assessmentItemQuestionType":"MultipleChoice"}
+            "stats": {
+                "assessmentItemQuestionType":"MultipleChoice",
+                "answerId":"option003",
+                "response":null,
+                "typeCode":"Multi_Value_Question_User_Answered",
+                "extensions":{
+                    "Assessment_Item_Question_Type": "MultiValue",
+                    "Assessment_Item_Response_Code": "Incorrect",
+                    "Student_Response":[{
+                        "Target_Id":"target",
+                        "Answer_Id":"option003",
+                        "Target_Sub_Question_Response_Code": "Incorrect"
+                    }]
+                }
+            }
         };
 		var message = utils.cloneObject(multiplechoice_incorrect_last);
 		message.isLastAttempt = false;
@@ -140,7 +185,22 @@ describe('IPC -> CE Multiple Choice', function()
             "correctness": 1,
             "feedback": "Your answer <%= studAnsValue %> is correct. Growth rate stays constant.",
             "correctAnswer": null,
-            "stats": {"answerId":"option000", "response":null, "assessmentItemQuestionType":"MultipleChoice"}
+            //"stats": {"answerId":"option000", "response":null, "assessmentItemQuestionType":"MultipleChoice"}
+            "stats": {
+                "assessmentItemQuestionType":"MultipleChoice",
+                "answerId":"option000",
+                "response":null,
+                "typeCode":"Multi_Value_Question_User_Answered",
+                "extensions":{
+                    "Assessment_Item_Question_Type":"MultiValue",
+                    "Assessment_Item_Response_Code":"Correct",
+                    "Student_Response":[{
+                        "Target_Id":"target",
+                        "Answer_Id":"option000",
+                        "Target_Sub_Question_Response_Code":"Correct"
+                    }]
+                }
+            }
         };
 		var message = utils.cloneObject(multiplechoice_incorrect_last);
 		message.studentSubmission.key = "option000";
