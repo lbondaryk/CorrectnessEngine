@@ -44,6 +44,9 @@ var discussionsAssessmentHandler;
         discussionsAssessmentHandler = Discussions.createAssessmentHandler();
 
         testReturnData = {
+            brixState: {
+                postUrl: 'MOCK-url'
+            }
         };
         
         testStudentSubmission = {
@@ -71,7 +74,8 @@ var discussionsAssessmentHandler;
                         "Assessment_Item_Question_Type": "MultiValue",
                         "Assessment_Item_Response_Code": "Correct",
                         "Item_Response_Text": "FAKE-response",
-                        "Item_Response_Pass_Fail": "Pass"
+                        "Item_Response_Stored_At_URL": testReturnData.brixState.postUrl,
+                        //"Item_Response_Pass_Fail": "Pass"
                     }
                 }
             };
@@ -80,6 +84,7 @@ var discussionsAssessmentHandler;
         it('should should return analytic data with Response_Code="Correct"', function (done) {
             testReturnData.correctness = 1;
             testStudentSubmission.entry = 'FAKE-entry';
+            testStudentSubmission.entry
             discussionsAssessmentHandler.calculateStats(testReturnData, testStudentSubmission)
             .then(function(result){
                 expectedResult.stats.extensions.Assessment_Item_Response_Code = 'Correct';
