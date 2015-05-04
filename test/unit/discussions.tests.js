@@ -71,7 +71,7 @@ var discussionsAssessmentHandler;
                 stats: {
                     typeCode: "Multi_Value_Question_User_Answered",
                     extensions: {
-                        "Assessment_Item_Question_Type": "MultiValue",
+                        "Assessment_Item_Question_Type": "SimpleWriting",
                         "Assessment_Item_Response_Code": "Correct",
                         "Item_Response_Text": "FAKE-response",
                         "Item_Response_Stored_At_URL": testReturnData.brixState.postUrl,
