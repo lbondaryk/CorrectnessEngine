@@ -94,10 +94,9 @@ describe('Multivalue assessments', function() {
                     testReturnData.correctness = 0; // Overall incorrect
                     testReturnData.brixState = {
                         "keyValueFeedback": {
-                            "answer1": true
                         }
                     };
-                    // Student selected answers 1 
+                    // Student did not select any 
                     testStudentSubmission = {
                     };
                     multivalueAssessmentHandler.calculateStats(testReturnData, testStudentSubmission)
@@ -269,6 +268,9 @@ describe('Multivalue assessments', function() {
                     });
                 });
             });
+
+            // @todo - add another test for when all selected are correct
+            // but it was partial correct, so overall is incorrect.
         });
 
         describe('D&D and Binning (values are of type string)', function() {
