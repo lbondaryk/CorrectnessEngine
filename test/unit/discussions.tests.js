@@ -44,9 +44,7 @@ var discussionsAssessmentHandler;
         discussionsAssessmentHandler = Discussions.createAssessmentHandler();
 
         testReturnData = {
-            brixState: {
-                postUrl: 'MOCK-url'
-            }
+            
         };
         
         testStudentSubmission = {
@@ -74,7 +72,6 @@ var discussionsAssessmentHandler;
                         "Assessment_Item_Question_Type": "SimpleWriting",
                         "Assessment_Item_Response_Code": "Correct",
                         "Item_Response_Text": "FAKE-response",
-                        "Item_Response_Stored_At_URL": testReturnData.brixState.postUrl,
                         //"Item_Response_Pass_Fail": "Pass"
                     }
                 }
@@ -84,7 +81,10 @@ var discussionsAssessmentHandler;
         it('should should return analytic data with Response_Code="Correct"', function (done) {
             testReturnData.correctness = 1;
             testStudentSubmission.entry = 'FAKE-entry';
-            testStudentSubmission.entry
+            testStudentSubmission.postUrl = 'MOCK-url';
+
+            expectedResult.stats.extensions.Item_Response_Stored_At_URL = testStudentSubmission.postUrl;
+            
             discussionsAssessmentHandler.calculateStats(testReturnData, testStudentSubmission)
             .then(function(result){
                 expectedResult.stats.extensions.Assessment_Item_Response_Code = 'Correct';
@@ -104,7 +104,7 @@ var discussionsAssessmentHandler;
     describe.skip('retrieveCorrectAnswer', function() {
     });
 
-    describe('FUNCTINAL TEST', function() {
+    describe('FUNCTIONAL TEST', function() {
          var ce = null;
          var handler = null;
 

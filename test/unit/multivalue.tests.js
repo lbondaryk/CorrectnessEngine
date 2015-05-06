@@ -83,10 +83,91 @@ describe('Multivalue assessments', function() {
             }
         };
 
-        describe('MultiSelect', function() {
+        describe('MultiSelect (values are of type boolean)', function() {
             var expectedResult;
             beforeEach(function () {
                 expectedResult = utils.cloneObject(sampleExpectedResult);
+            });
+
+            describe('given no answer', function() {
+                it('should should return analytic data with Response_Code="Incorrect"', function (done) {
+                    testReturnData.correctness = 0; // Overall incorrect
+                    testReturnData.brixState = {
+                        "keyValueFeedback": {
+                            "answer1": true
+                        }
+                    };
+                    // Student selected answers 1 
+                    testStudentSubmission = {
+                    };
+                    multivalueAssessmentHandler.calculateStats(testReturnData, testStudentSubmission)
+                    .then(function(result){
+                        expectedResult.stats.extensions.Assessment_Item_Response_Code = 'Incorrect';
+                        expectedResult.stats.extensions.Student_Response = [];
+                        
+                        expect(result.stats.extensions).to.deep.equal(expectedResult.stats.extensions);
+                        done();
+                    })
+                    .catch(function(error){
+                        done(error);
+                    });
+                });
+            });
+
+            describe('given only one answer and it\'s correct', function() {
+                it('should should return analytic data with Response_Code="Correct"', function (done) {
+                    testReturnData.correctness = 1; // Overall correct
+                    testReturnData.brixState = {
+                        "keyValueFeedback": {
+                            "answer1": true
+                        }
+                    };
+                    // Student selected answers 1 
+                    testStudentSubmission = {
+                        "answer1": true
+                    };
+                    multivalueAssessmentHandler.calculateStats(testReturnData, testStudentSubmission)
+                    .then(function(result){
+                        expectedResult.stats.extensions.Assessment_Item_Response_Code = 'Correct';
+                        expectedResult.stats.extensions.Student_Response[0].Answer_Id = 'answer1';
+                        expectedResult.stats.extensions.Student_Response[0].Target_Sub_Question_Response_Code = 'Correct';
+                        
+                        expect(result.stats.extensions).to.deep.equal(expectedResult.stats.extensions);
+                        done();
+                    })
+                    .catch(function(error){
+                        done(error);
+                    });
+                });
+            });
+
+            describe('given all values to be correct (no brixState)', function() {
+                it('should should return analytic data with Response_Code="Correct"', function (done) {
+                    testReturnData.correctness = 1;
+                    
+                    //testReturnData.brixState;
+                    // Student selected answers 1 and 3, both correct
+                    testStudentSubmission = {
+                        "answer1": true,
+                        "answer3": true
+                    };
+                    multivalueAssessmentHandler.calculateStats(testReturnData, testStudentSubmission)
+                    .then(function(result){
+                        expectedResult.stats.extensions.Assessment_Item_Response_Code = 'Correct';
+                        expectedResult.stats.extensions.Student_Response[0].Answer_Id = 'answer1';
+                        expectedResult.stats.extensions.Student_Response[0].Target_Sub_Question_Response_Code = 'Correct';
+                        expectedResult.stats.extensions.Student_Response.push({
+                            Target_Id: 'true',
+                            Answer_Id: 'answer3',
+                            Target_Sub_Question_Response_Code: 'Correct'
+                        });
+                        expect(result.stats.extensions).to.deep.equal(expectedResult.stats.extensions);
+                        done();
+                    })
+                    .catch(function(error){
+                        done(error);
+                    });
+                });
             });
 
             describe('given all values to be correct', function() {
@@ -122,9 +203,10 @@ describe('Multivalue assessments', function() {
                 });
             });
 
-            describe('given one incorrect value', function() {
+
+            describe('given one correct and one incorrect values', function() {
                 it('should should return analytic data with Response_Code="Incorrect"', function (done) {
-                    testReturnData.correctness = 0;
+                    testReturnData.correctness = 0; // Overall incorrect
                     testReturnData.brixState = {
                         "keyValueFeedback": {
                             "answer1": true,
@@ -155,7 +237,7 @@ describe('Multivalue assessments', function() {
                 });
             });
             
-            describe('given all incorrect value', function() {
+            describe('given all incorrect values', function() {
                 it('should should return analytic data with Response_Code="Incorrect"', function (done) {
                     testReturnData.correctness = 0;
                     testReturnData.brixState = {
@@ -189,11 +271,42 @@ describe('Multivalue assessments', function() {
             });
         });
 
-        describe('D&D and Binning', function() {
+        describe('D&D and Binning (values are of type string)', function() {
             var expectedResult;
             beforeEach(function () {
                 expectedResult = utils.cloneObject(sampleExpectedResult);
                 
+            });
+
+            describe('given only one answer and it\'s incorrect', function() {
+                it('should should return analytic data with Response_Code="Incorrect"', function (done) {
+                    testReturnData.correctness = 0;
+
+                    testReturnData.brixState = {
+                        "keyValueFeedback": {
+                            "answer1":false
+                        }
+                    };
+                    // Student did not select any (although it may not be possible by UI)
+                    testStudentSubmission = {
+                        "answer1": "the_wronganswer"
+                    };
+                    multivalueAssessmentHandler.calculateStats(testReturnData, testStudentSubmission)
+                    .then(function(result){
+                        expectedResult.stats.extensions.Assessment_Item_Response_Code = 'Incorrect';
+                        expectedResult.stats.extensions.Student_Response[0] = {
+                            Target_Id: 'the_wronganswer',
+                            Answer_Id: 'answer1',
+                            Target_Sub_Question_Response_Code: 'Incorrect'
+                        };
+                        
+                        expect(result.stats.extensions).to.deep.equal(expectedResult.stats.extensions);
+                        done();
+                    })
+                    .catch(function(error){
+                        done(error);
+                    });
+                });
             });
 
             describe('given all values to be correct', function() {
@@ -226,7 +339,7 @@ describe('Multivalue assessments', function() {
                 });
             });
 
-            describe('given one incorrect value', function() {
+            describe('given one correct and one incorrect values', function() {
                 it('should should return analytic data with Response_Code="Incorrect"', function (done) {
                     testReturnData.correctness = 0;
                     testReturnData.brixState = {
