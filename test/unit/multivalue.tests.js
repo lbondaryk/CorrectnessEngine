@@ -144,7 +144,6 @@ describe('Multivalue assessments', function() {
                 it('should should return analytic data with Response_Code="Correct"', function (done) {
                     testReturnData.correctness = 1;
                     
-                    //testReturnData.brixState;
                     // Student selected answers 1 and 3, both correct
                     testStudentSubmission = {
                         "answer1": true,
@@ -245,7 +244,7 @@ describe('Multivalue assessments', function() {
                             "answer4": false
                         }
                     };
-                    // Student selected answers 1 and 2
+                    // Student selected answers 2 and 4
                     testStudentSubmission = {
                         "answer2": true,
                         "answer4": true
@@ -269,8 +268,39 @@ describe('Multivalue assessments', function() {
                 });
             });
 
-            // @todo - add another test for when all selected are correct
-            // but it was partial correct, so overall is incorrect.
+            describe('given all selections are correct, but missed some other corrects', function() {
+                it('should should return analytic data with Response_Code="Incorrect"', function (done) {
+                    testReturnData.correctness = 0;
+                    testReturnData.brixState = {
+                        "keyValueFeedback": {
+                            "answer1": true,
+                            "answer3": true
+                        }
+                    };
+                    // Student selected answers 1 and 3, but missed some other correct answer
+                    testStudentSubmission = {
+                        "answer1": true,
+                        "answer3": true
+                    };
+                    multivalueAssessmentHandler.calculateStats(testReturnData, testStudentSubmission)
+                    .then(function(result){
+                        expectedResult.stats.extensions.Assessment_Item_Response_Code = 'Incorrect';
+                        expectedResult.stats.extensions.Student_Response[0].Answer_Id = 'answer1';
+                        expectedResult.stats.extensions.Student_Response[0].Target_Sub_Question_Response_Code = 'Correct';
+                        expectedResult.stats.extensions.Student_Response.push({
+                            Target_Id: 'true',
+                            Answer_Id: 'answer3',
+                            Target_Sub_Question_Response_Code: 'Correct'
+                        });
+                        expect(result.stats.extensions).to.deep.equal(expectedResult.stats.extensions);
+                        done();
+                    })
+                    .catch(function(error){
+                        done(error);
+                    });
+                });
+            });
+
         });
 
         describe('D&D and Binning (values are of type string)', function() {
