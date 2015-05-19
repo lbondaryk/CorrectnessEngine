@@ -9,7 +9,7 @@
     "logToScreen": true,
     "logToFile": true,
     "logDir": "log/",
-    "validateSchema": false,
+    "validateSchema": true,
 
     "turingsCraft": {
     	"baseUrl": "https://dev.turingscraft.com:39484",
