@@ -1,12 +1,20 @@
 {
-    "sequenceNodeKey": "bbbb8238fsdfhe9h9shdds",
-    "answerKey": {
-        "assessmentType": "discussions",
-        "answers": {
-        	"topicId": "2937859238572938",
-        	"authorId": "2893982r"
-        }
+    "headers":
+    {
+        "pi-id": "ffffffff54950ba0e4b0feb658a6dbc6",
+        "course-id": "54950cd1e4b0f74ecb09c358"
     },
-    "studentSubmission": { "entry": "I love journals."},
-    "isLastAttempt": true
+    "payload":
+    {
+        "sequenceNodeKey": "bbbb8238fsdfhe9h9shdds",
+        "answerKey": {
+            "assessmentType": "discussions",
+            "answers": {
+                "topicId": "2937859238572938",
+                "authorId": "2893982r"
+            }
+        },
+        "studentSubmission": { "entry": "I love journals."},
+        "isLastAttempt": true
+    }
 }

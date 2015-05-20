@@ -31,7 +31,7 @@ var journalmockdata = require('../test_messages/journal.json');
 // base class let's hold off on that for now.
 
 /**
- * Discussions Assessment tests.  We have to test these through the 
+ * Discussions Assessment tests.  We have to test these through the
  * engine's assess method.
  */
 describe('Discussions assessments', function() {
@@ -44,9 +44,9 @@ var discussionsAssessmentHandler;
         discussionsAssessmentHandler = Discussions.createAssessmentHandler();
 
         testReturnData = {
-            
+
         };
-        
+
         testStudentSubmission = {
         };
     });
@@ -84,7 +84,7 @@ var discussionsAssessmentHandler;
             testStudentSubmission.postUrl = 'MOCK-url';
 
             expectedResult.stats.extensions.Item_Response_Stored_At_URL = testStudentSubmission.postUrl;
-            
+
             discussionsAssessmentHandler.calculateStats(testReturnData, testStudentSubmission)
             .then(function(result){
                 expectedResult.stats.extensions.Assessment_Item_Response_Code = 'Correct';
@@ -96,7 +96,7 @@ var discussionsAssessmentHandler;
                 done(error);
             });
         });
-        
+
     });
 
     describe.skip('addCorrectAnswer', function() {
@@ -114,7 +114,7 @@ var discussionsAssessmentHandler;
 
         it('should complain if answer is badly formatted', function (done) {
             var data = utils.cloneObject(journalmockdata);
-            data.answerKey = {assessmentType: "discussions", assessmentWrong: "thingy", answers: "string"};
+            data.payload.answerKey = {assessmentType: "discussions", assessmentWrong: "thingy", answers: "string"};
             ce.processSubmission(data, function(err, result)  {
                 try {
                     expect(err).to.not.be.null;
@@ -135,8 +135,8 @@ var discussionsAssessmentHandler;
                 try {
                     expect(result.correctness).to.equal(1);
                     expect(result.discussions).to.be.true;
-                    expect(result.brixState.authorId).to.equal(data.answerKey.answers.authorId);
-                    expect(result.brixState.topicId).to.equal(data.answerKey.answers.topicId);
+                    expect(result.brixState.authorId).to.equal(data.payload.answerKey.answers.authorId);
+                    expect(result.brixState.topicId).to.equal(data.payload.answerKey.answers.topicId);
                     // @todo - this is the 2.1 code line.  remove the 'response' line.
                     //expect(result.stats.itemResponseText).to.equal('I love journals.');
                     expect(result.stats.response).to.equal('I love journals.');
@@ -153,7 +153,7 @@ var discussionsAssessmentHandler;
 
         it('should complain of a badly formatted submission', function (done) {
             var data = utils.cloneObject(journalmockdata);
-            data.studentSubmission = { "pants": "I love me some pants." };
+            data.payload.studentSubmission = { "pants": "I love me some pants." };
             ce.processSubmission(data, function(err, result)  {
                 try {
                     expect(err).to.not.be.null;
@@ -172,7 +172,7 @@ var discussionsAssessmentHandler;
     });
 
     /**
-     * Discussions Assessment Retreive answer tests.  We have to test these through the 
+     * Discussions Assessment Retreive answer tests.  We have to test these through the
      * engine's retrieveAnswer method.
      */
     describe('Discussions retrieve answer', function() {
@@ -185,10 +185,11 @@ var discussionsAssessmentHandler;
 
         it('should retrieve the correct answer', function(done) {
             var data = utils.cloneObject(journalmockdata);
-            var answerKey = data.answerKey;
 
-            ce.retrieveAnswer(answerKey, function(err, result) {
-                try {
+            ce.retrieveAnswer(data, function(err, result) {
+                try
+                {
+                    expect(err).to.be.null;
                     expect(result.correctAnswer).to.be.null;
                     done();
                 }

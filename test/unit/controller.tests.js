@@ -160,7 +160,10 @@ describe ('CE Controller', function(){
             var request = new RequestMock(onReplyCallback);
             
             //Act
-            handler(request);
+            //handler(request);
+            // We need a this object w/ the headers in it until hapi is upgraded
+            var handlerThis = { raw: { req: { headers: { 'pi-id': 'me', 'course-id': 'calc101'} } } };
+            handler.call(handlerThis, request);
             
             //Assert
             function onReplyCallback(replyValue) {
@@ -180,7 +183,10 @@ describe ('CE Controller', function(){
             var request = new RequestMock(onReplyCallback);
             
             //Act
-            handler(request);
+            //handler(request);
+            // We need a this object w/ the headers in it until hapi is upgraded
+            var handlerThis = { raw: { req: { headers: { 'pi-id': 'me', 'course-id': 'calc101'} } } };
+            handler.call(handlerThis, request);
 
             //Assert
             function onReplyCallback(replyValue) {

@@ -34,7 +34,7 @@ describe('CE handles assessments', function() {
     it('should throw an error with unknown type submissions', function (done) {
         var data = utils.cloneObject(mcqmockdata);
         // update the assessmentType to some bad data
-        data.answerKey.assessmentType = "monkey";
+        data.payload.answerKey.assessmentType = "monkey";
         ce.processSubmission(data, function(err, result)  {
             try {
                 expect(err).to.equal('The assessmentType \'monkey\' can not be processed by this Correctness Engine');

@@ -1,30 +1,38 @@
 {
-    "sequenceNodeKey": "8238fsdfhe9h9shdds",
-    "answerKey":
+    "headers":
     {
-        "assessmentType": "numeric",
-        "answers":
+        "pi-id": "ffffffff54950ba0e4b0feb658a6dbc6",
+        "course-id": "54950cd1e4b0f74ecb09c358"
+    },
+    "payload":
+    {
+        "sequenceNodeKey": "8238fsdfhe9h9shdds",
+        "answerKey":
         {
-            "correctValue": 42,
-            "acceptableError": 10,
-            "notifyOnCorrectNotExact": false,
-            "correctResponse": "Moving the slider shows that the parallax angle of this star is slightly less than that of a star at a distance of 20 light-years.  Therefore, its distance must be slightly larger.",
-            "incorrectResponses":
-            [
-                {
-                    "wrongRange": [1, 42],
-                    "feedback": "Is it possible to make the parallax angle small enough by moving the slider?  What does that tell you about this star’s distance? Try again." 
-                },
-                {
-                    "wrongRange": [42, 1000000],
-                    "feedback": "What parallax angle do you get when you set the slider? Try again." 
-                }
-            ]
-        }
-    },
-    "studentSubmission": 
-    {
-      "value": 32
-    },
-    "isLastAttempt": false
+            "assessmentType": "numeric",
+            "answers":
+            {
+                "correctValue": 42,
+                "acceptableError": 10,
+                "notifyOnCorrectNotExact": false,
+                "correctResponse": "Moving the slider shows that the parallax angle of this star is slightly less than that of a star at a distance of 20 light-years.  Therefore, its distance must be slightly larger.",
+                "incorrectResponses":
+                [
+                    {
+                        "wrongRange": [1, 42],
+                        "feedback": "Is it possible to make the parallax angle small enough by moving the slider?  What does that tell you about this star’s distance? Try again." 
+                    },
+                    {
+                        "wrongRange": [42, 1000000],
+                        "feedback": "What parallax angle do you get when you set the slider? Try again." 
+                    }
+                ]
+            }
+        },
+        "studentSubmission": 
+        {
+          "value": 32
+        },
+        "isLastAttempt": false
+    }
 }

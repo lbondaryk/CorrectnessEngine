@@ -63,10 +63,11 @@ describe('IPC -> CE Multiple Choice', function()
                 }
             }
         };
-        var message = utils.cloneObject(multiplechoice_incorrect_notlast);
+        var message = utils.cloneObject(multiplechoice_incorrect_notlast.payload);
         request(server.listener)
             .post('/assessments')
             .send(message)
+            .set(multiplechoice_incorrect_notlast.headers)
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/) // Verify the content type
             .expect(200) // Verify the result code (200=OK)
@@ -111,10 +112,11 @@ describe('IPC -> CE Multiple Choice', function()
                 }
             }
         };
-		var message = utils.cloneObject(multiplechoice_incorrect_last);
+		var message = utils.cloneObject(multiplechoice_incorrect_last.payload);
 		request(server.listener)
             .post('/assessments')
             .send(message)
+            .set(multiplechoice_incorrect_last.headers)
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/) // Verify the content type
             .expect(200) // Verify the result code (200=OK)
@@ -156,11 +158,12 @@ describe('IPC -> CE Multiple Choice', function()
                 }
             }
         };
-		var message = utils.cloneObject(multiplechoice_incorrect_last);
+		var message = utils.cloneObject(multiplechoice_incorrect_last.payload);
 		message.isLastAttempt = false;
 		request(server.listener)
             .post('/assessments')
             .send(message)
+            .set(multiplechoice_incorrect_last.headers)
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/) // Verify the content type
             .expect(200) // Verify the result code (200=OK)
@@ -202,11 +205,12 @@ describe('IPC -> CE Multiple Choice', function()
                 }
             }
         };
-		var message = utils.cloneObject(multiplechoice_incorrect_last);
+		var message = utils.cloneObject(multiplechoice_incorrect_last.payload);
 		message.studentSubmission.key = "option000";
 		request(server.listener)
             .post('/assessments')
             .send(message)
+            .set(multiplechoice_incorrect_last.headers)
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/) // Verify the content type
             .expect(200) // Verify the result code (200=OK)
@@ -232,6 +236,8 @@ describe('IPC -> CE Multiple Choice', function()
 		request(server.listener)
             .post('/assessments')
             .send(message)
+            .set('pi-id', '')
+            .set('course-id', '')
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/) // Verify the content type
             .expect(400) // Verify the result code (200=OK)

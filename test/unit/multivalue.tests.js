@@ -459,7 +459,7 @@ describe('Multivalue assessments', function() {
 
         it('should complain if answer is badly formatted', function (done) {
             var data = utils.cloneObject(mockdata);
-            data.answerKey = {assessmentType: "multivalue", assessmentWrong: "thingy", answers: "string"};
+            data.payload.answerKey = {assessmentType: "multivalue", assessmentWrong: "thingy", answers: "string"};
             ce.processSubmission(data, function(err, result)  {
                 try {
                     expect(err).to.not.be.null;
@@ -477,7 +477,7 @@ describe('Multivalue assessments', function() {
         it('should complain if submission is badly formatted', function (done) {
             var data = utils.cloneObject(mockdata);
             // @todo - the student submission validation is really questionable for this.
-            data.studentSubmission = "stringy";
+            data.payload.studentSubmission = "stringy";
             ce.processSubmission(data, function(err, result)  {
                 try {
                     expect(err).to.not.be.null;
@@ -495,7 +495,7 @@ describe('Multivalue assessments', function() {
 
         it('should handle incorrect submission', function (done) {
             var data = utils.cloneObject(mockdata);
-            data.studentSubmission = {
+            data.payload.studentSubmission = {
                 "answer1": true,
                 "answer2": true
             };
@@ -518,7 +518,7 @@ describe('Multivalue assessments', function() {
 
         it('should handle another incorrect submission', function (done) {
             var data = utils.cloneObject(mockdata);
-            data.studentSubmission = {
+            data.payload.studentSubmission = {
                 "answer1": true,
                 "answer2": true,
                 "answer3": true
@@ -559,12 +559,12 @@ describe('Multivalue assessments', function() {
 
         it('should report back the correct answer if isLastAttempt is true', function (done) {
             var data = utils.cloneObject(mockdata);
-            data.studentSubmission = {
+            data.payload.studentSubmission = {
                 "answer1": true,
                 "answer2": true,
                 "answer3": true
             };
-            data.isLastAttempt = true;
+            data.payload.isLastAttempt = true;
             ce.processSubmission(data, function(err, result)  {
                 try {
                     expect(result.correctness).to.equal(0);
@@ -599,9 +599,8 @@ describe('Multivalue assessments', function() {
 
         it('should retrieve the correct answer', function(done) {
             var data = utils.cloneObject(mockdata);
-            var answerKey = data.answerKey;
 
-            ce.retrieveAnswer(answerKey, function(err, result) {
+            ce.retrieveAnswer(data, function(err, result) {
                 try {
                     expect(result.correctAnswer.keyValues).to.deep.equal({ "answer1": true, "answer3": true });
                     done();

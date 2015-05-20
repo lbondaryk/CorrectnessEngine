@@ -31,7 +31,7 @@ var mockdata = require('../test_messages/multiplechoice_incorrect_last.json');
 // base class let's hold off on that for now.
 
 /**
- * MultipleChoice Assessment tests.  We have to test these through the 
+ * MultipleChoice Assessment tests.  We have to test these through the
  * engine's assess method.
  */
 
@@ -47,7 +47,7 @@ describe('MultipleChoice assessments', function() {
 
         testReturnData = {
         };
-        
+
         testStudentSubmission = {
         };
     });
@@ -119,14 +119,14 @@ describe('MultipleChoice assessments', function() {
                 });
             });
         });
-        
+
     });
 
     describe.skip('addCorrectAnswer', function() {
     });
     describe.skip('retrieveCorrectAnswer', function() {
     });
-    
+
 
     describe('MultipleChoice assessments: FUNCTIONAL TEST', function() {
         var ce = null;
@@ -138,7 +138,7 @@ describe('MultipleChoice assessments', function() {
 
         it('should complain if answer is badly formatted', function (done) {
             var data = utils.cloneObject(mockdata);
-            data.answerKey = {assessmentType: "multiplechoice", assessmentWrong: "thingy", answers: "string"};
+            data.payload.answerKey = {assessmentType: "multiplechoice", assessmentWrong: "thingy", answers: "string"};
             ce.processSubmission(data, function(err, result)  {
                 try {
                     expect(err).to.not.be.null;
@@ -155,7 +155,7 @@ describe('MultipleChoice assessments', function() {
 
         it('should complain if submission is badly formatted', function (done) {
             var data = utils.cloneObject(mockdata);
-            data.studentSubmission = {"submissiony": {"thing": "so wrong"}};
+            data.payload.studentSubmission = {"submissiony": {"thing": "so wrong"}};
             ce.processSubmission(data, function(err, result)  {
                 try {
                     expect(err).to.not.be.null;
@@ -173,7 +173,7 @@ describe('MultipleChoice assessments', function() {
 
         it('should complain if submission is not in answer key', function (done) {
             var data = utils.cloneObject(mockdata);
-            data.studentSubmission = {"key": "pants"};
+            data.payload.studentSubmission = {"key": "pants"};
             ce.processSubmission(data, function(err, result)  {
                 try {
                     expect(err).to.not.be.null;
@@ -208,7 +208,7 @@ describe('MultipleChoice assessments', function() {
 
         it('should handle correct submission', function (done) {
             var data = utils.cloneObject(mockdata);
-            data.studentSubmission.key = "option000";
+            data.payload.studentSubmission.key = "option000";
             ce.processSubmission(data, function(err, result)  {
                 try {
                     expect(result.correctness).to.equal(1);
@@ -228,7 +228,7 @@ describe('MultipleChoice assessments', function() {
         it('should report back the correct answer if isLastAttempt is true', function (done) {
             var data = utils.cloneObject(mockdata);
             // set an incorrect answer, just for fun.
-            data.studentSubmission.key = "option003";
+            data.payload.studentSubmission.key = "option003";
             ce.processSubmission(data, function(err, result)  {
                 try {
                     expect(result.correctness).to.equal(0);
@@ -250,9 +250,9 @@ describe('MultipleChoice assessments', function() {
         it('should report back the correct answer with empty feedback string if isLastAttempt is true', function (done) {
             var data = utils.cloneObject(mockdata);
             // set an incorrect answer, just for fun.
-            data.studentSubmission.key = "option003";
+            data.payload.studentSubmission.key = "option003";
             // remove the feedback value from the correct answer
-            data.answerKey.answers.option000.response = "";
+            data.payload.answerKey.answers.option000.response = "";
 
             ce.processSubmission(data, function(err, result)  {
                 try {
@@ -276,8 +276,8 @@ describe('MultipleChoice assessments', function() {
         it('should not report back the correct answer if isLastAttempt is false', function (done) {
             var data = utils.cloneObject(mockdata);
 
-            data.studentSubmission.key = "option003";
-            data.isLastAttempt = false;
+            data.payload.studentSubmission.key = "option003";
+            data.payload.isLastAttempt = false;
             ce.processSubmission(data, function(err, result)  {
                 try {
                     expect(result.correctness).to.equal(0);
@@ -298,7 +298,7 @@ describe('MultipleChoice assessments', function() {
     });
 
     /**
-     * MultipleChoice Assessment Retreive answer tests.  We have to test these through the 
+     * MultipleChoice Assessment Retreive answer tests.  We have to test these through the
      * engine's retrieveAnswer method.
      */
     describe('MultipleChoice retrieve answer', function() {
@@ -307,13 +307,12 @@ describe('MultipleChoice assessments', function() {
 
         before(function () {
             ce = new CE.EngineHandler();
-        });    
+        });
 
         it('should retrieve the correct answer', function(done) {
             var data = utils.cloneObject(mockdata);
-            var answerKey = data.answerKey;
 
-            ce.retrieveAnswer(answerKey, function(err, result) {
+            ce.retrieveAnswer(data, function(err, result) {
                 try {
                     expect(result.correctAnswer).to.deep.equal({ key: 'option000' });
                     done();

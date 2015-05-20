@@ -31,7 +31,7 @@ var alwaysCorrectMockData = require('../test_messages/alwaysCorrect.json');
 // base class let's hold off on that for now.
 
 /**
- * AlwaysCorrect Assessment tests.  We have to test these through the 
+ * AlwaysCorrect Assessment tests.  We have to test these through the
  * engine's assess method.
  */
 describe('AlwaysCorrect assessments', function() {
@@ -46,7 +46,7 @@ describe('AlwaysCorrect assessments', function() {
 
         testReturnData = {
         };
-        
+
         testStudentSubmission = {
         };
     });
@@ -98,7 +98,7 @@ describe('AlwaysCorrect assessments', function() {
                 done(error);
             });
         });
-        
+
     });
 
     describe.skip('addCorrectAnswer', function() {
@@ -120,7 +120,7 @@ describe('AlwaysCorrect assessments', function() {
                 try {
                     expect(result.correctness).to.equal(1);
                     expect(result.stats.response).to.equal('I love always correct types.');
-                    expect(result.stats.answerId).to.be.null;                
+                    expect(result.stats.answerId).to.be.null;
                     expect(result.stats.assessmentItemQuestionType).to.equal('AlwaysCorrect');
                     done();
                 }
@@ -133,13 +133,13 @@ describe('AlwaysCorrect assessments', function() {
 
         it('should handle correct alwayscorrect submission of some fictional type', function (done) {
             var data = utils.cloneObject(alwaysCorrectMockData);
-            delete data.studentSubmission.entry;
-            data.studentSubmission.pants = "Oh, yeah!";
+            delete data.payload.studentSubmission.entry;
+            data.payload.studentSubmission.pants = "Oh, yeah!";
             ce.processSubmission(data, function(err, result)  {
                 try {
                     expect(result.correctness).to.equal(1);
                     expect(result.stats.response).to.equal('Oh, yeah!');
-                    expect(result.stats.answerId).to.be.null;                
+                    expect(result.stats.answerId).to.be.null;
                     expect(result.stats.assessmentItemQuestionType).to.equal('AlwaysCorrect');
                     done();
                 }
@@ -152,13 +152,13 @@ describe('AlwaysCorrect assessments', function() {
 
         it('should handle correct alwayscorrect submission of some other fictional type', function (done) {
             var data = utils.cloneObject(alwaysCorrectMockData);
-            delete data.studentSubmission;
-            data.studentSubmission = "Oh, no.";
+            delete data.payload.studentSubmission;
+            data.payload.studentSubmission = "Oh, no.";
             ce.processSubmission(data, function(err, result)  {
                 try {
                     expect(result.correctness).to.equal(1);
                     expect(result.stats.response).to.equal('Oh, no.');
-                    expect(result.stats.answerId).to.be.null;                
+                    expect(result.stats.answerId).to.be.null;
                     expect(result.stats.assessmentItemQuestionType).to.equal('AlwaysCorrect');
                     done();
                 }
@@ -171,9 +171,9 @@ describe('AlwaysCorrect assessments', function() {
 
         it('should handle correct alwayscorrect submission of yet another fictional type', function (done) {
             var data = utils.cloneObject(alwaysCorrectMockData);
-            delete data.studentSubmission;
+            delete data.payload.studentSubmission;
             // This should return the first key as the result.stats.response
-            data.studentSubmission = {
+            data.payload.studentSubmission = {
                 "pantsOpinion": "Oh, no.",
                 "pantsNum": 2445
             };
@@ -181,7 +181,7 @@ describe('AlwaysCorrect assessments', function() {
                 try {
                     expect(result.correctness).to.equal(1);
                     expect(result.stats.response).to.equal('Oh, no.');
-                    expect(result.stats.answerId).to.be.null;                
+                    expect(result.stats.answerId).to.be.null;
                     expect(result.stats.assessmentItemQuestionType).to.equal('AlwaysCorrect');
                     done();
                 }
@@ -194,9 +194,9 @@ describe('AlwaysCorrect assessments', function() {
 
         it('should handle correct alwayscorrect submission of yet another another fictional type', function (done) {
             var data = utils.cloneObject(alwaysCorrectMockData);
-            delete data.studentSubmission;
+            delete data.payload.studentSubmission;
             // This should return the first key as the result.stats.response
-            data.studentSubmission = {
+            data.payload.studentSubmission = {
                 "pantsOpinions": [
                     { "jeans": true },
                     { "leggings": true },
@@ -207,7 +207,7 @@ describe('AlwaysCorrect assessments', function() {
                 try {
                     expect(result.correctness).to.equal(1);
                     expect(result.stats.response).to.equal('student submission is not a string value');
-                    expect(result.stats.answerId).to.be.null;                
+                    expect(result.stats.answerId).to.be.null;
                     expect(result.stats.assessmentItemQuestionType).to.equal('AlwaysCorrect');
                     done();
                 }
@@ -220,7 +220,7 @@ describe('AlwaysCorrect assessments', function() {
     });
 
     /**
-     * AlwaysCorrect Assessment Retreive answer tests.  We have to test these through the 
+     * AlwaysCorrect Assessment Retreive answer tests.  We have to test these through the
      * engine's retrieveAnswer method.
      */
     describe('AlwaysCorrect retrieve answer', function() {
@@ -233,10 +233,12 @@ describe('AlwaysCorrect assessments', function() {
 
         it('should retrieve the correct answer', function(done) {
             var data = utils.cloneObject(alwaysCorrectMockData);
-            var answerKey = data.answerKey;
+            var answerKey = data.payload.answerKey;
 
-            ce.retrieveAnswer(answerKey, function(err, result) {
-                try {
+            ce.retrieveAnswer(data, function(err, result) {
+                try
+                {
+                    expect(err).to.be.null;
                     expect(result.correctAnswer).to.be.null;
                     done();
                 }

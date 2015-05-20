@@ -1,8 +1,17 @@
 {
-    "sequenceNodeKey": "bbbb8238fsdfhe9h9shdds",
-    "answerKey": {
-        "assessmentType": "alwayscorrect"
+    "headers":
+    {          
+        "pi-id": "ffffffff54950ba0e4b0feb658a6dbc6",
+        "course-id": "54950cd1e4b0f74ecb09c358"
+    },
+    "payload":
+    {
+        "sequenceNodeKey": "bbbb8238fsdfhe9h9shdds",
+        "answerKey":
+        {
+            "assessmentType": "alwayscorrect"
         },
-    "studentSubmission": { "entry": "I love always correct types."},
-    "isLastAttempt": true
+        "studentSubmission": { "entry": "I love always correct types."},
+        "isLastAttempt": true
+    }
 }

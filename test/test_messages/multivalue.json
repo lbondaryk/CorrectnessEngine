@@ -1,25 +1,33 @@
 {
-    "sequenceNodeKey": "8238fsdfhe9h9shdds",
-    "answerKey":
+    "headers":
     {
-        "assessmentType": "multivalue",
-        "answers":
+        "pi-id": "ffffffff54950ba0e4b0feb658a6dbc6",
+        "course-id": "54950cd1e4b0f74ecb09c358"
+    },
+    "payload":
+    {
+        "sequenceNodeKey": "8238fsdfhe9h9shdds",
+        "answerKey":
         {
-            "correctValues":
-            [
-                {
-                    "answer1": true,
-                    "answer3": true
-                }
-            ],
-            "correctResponse": "We need enough more food to support the increase in population but it isn't going to quadruple by 2050.",
-            "incorrectResponse": "Nope, sorry try again"
-        }
-    },
-    "studentSubmission": 
-    {
-      "answer1": true,
-      "answer3": true
-    },
-    "isLastAttempt": false
+            "assessmentType": "multivalue",
+            "answers":
+            {
+                "correctValues":
+                [
+                    {
+                        "answer1": true,
+                        "answer3": true
+                    }
+                ],
+                "correctResponse": "We need enough more food to support the increase in population but it isn't going to quadruple by 2050.",
+                "incorrectResponse": "Nope, sorry try again"
+            }
+        },
+        "studentSubmission": 
+        {
+          "answer1": true,
+          "answer3": true
+        },
+        "isLastAttempt": false
+    }
 }
