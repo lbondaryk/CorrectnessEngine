@@ -274,6 +274,7 @@ describe('ProgrammingExercise retrieve answer', function() {
 
     it('should return null if there is no correct answer', function(done) {
         var data = utils.cloneObject(mockdata);
+        data.payload = data.payload.answerKey;
 
         ce.retrieveAnswer(data, function(err, result) {
             try {
@@ -289,7 +290,8 @@ describe('ProgrammingExercise retrieve answer', function() {
 
     it('should return an empty array if that is what is in the config', function(done) {
         var data = utils.cloneObject(mockdata);
-        var answerKey = data.payload.answerKey;
+        data.payload = data.payload.answerKey;
+        var answerKey = data.payload;
         var answers = answerKey.answers;
 
         var codeExamples = [];
@@ -312,7 +314,8 @@ describe('ProgrammingExercise retrieve answer', function() {
 
     it('should return all the codeExamples', function(done) {
         var data = utils.cloneObject(mockdata);
-        var answerKey = data.payload.answerKey;
+        data.payload = data.payload.answerKey;
+        var answerKey = data.payload;
         var answers = answerKey.answers;
 
         var codeArray1 = [

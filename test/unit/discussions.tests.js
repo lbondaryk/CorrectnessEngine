@@ -172,7 +172,7 @@ var discussionsAssessmentHandler;
     });
 
     /**
-     * Discussions Assessment Retreive answer tests.  We have to test these through the
+     * Discussions Assessment Retrieve answer tests.  We have to test these through the
      * engine's retrieveAnswer method.
      */
     describe('Discussions retrieve answer', function() {
@@ -185,6 +185,7 @@ var discussionsAssessmentHandler;
 
         it('should retrieve the correct answer', function(done) {
             var data = utils.cloneObject(journalmockdata);
+            data.payload = data.payload.answerKey;
 
             ce.retrieveAnswer(data, function(err, result) {
                 try

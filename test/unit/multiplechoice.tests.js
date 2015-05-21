@@ -311,6 +311,7 @@ describe('MultipleChoice assessments', function() {
 
         it('should retrieve the correct answer', function(done) {
             var data = utils.cloneObject(mockdata);
+            data.payload = data.payload.answerKey;
 
             ce.retrieveAnswer(data, function(err, result) {
                 try {

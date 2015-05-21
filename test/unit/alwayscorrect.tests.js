@@ -233,7 +233,7 @@ describe('AlwaysCorrect assessments', function() {
 
         it('should retrieve the correct answer', function(done) {
             var data = utils.cloneObject(alwaysCorrectMockData);
-            var answerKey = data.payload.answerKey;
+            data.payload = data.payload.answerKey;
 
             ce.retrieveAnswer(data, function(err, result) {
                 try
